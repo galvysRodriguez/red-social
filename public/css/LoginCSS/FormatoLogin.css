@@ -1,0 +1,130 @@
+*, ::before, ::after{
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+form{
+    width: 83%;
+}
+
+.contenedor{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 2000px;
+    height: 100%;
+    max-height: 1000px;
+}
+
+/*--------------------------------*/
+/*separador y divisor, hacen que los dos fondos no se toquen y se mantengan en su lugar con sus recpectivos elementos*/
+.separador{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.divisor{
+    flex: 1;
+    min-width: 200px;
+}
+/*---------------------------------*/
+
+.FondoLogin {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(221, 222, 224, 0.2);
+    width: 80vw;
+}
+
+.imgFormulario{
+    height: 100%;
+}
+
+.imgFormulario img{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    object-fit: cover;
+}
+
+
+.FondoLogin .imgFormulario{
+    top: 50px;
+}
+
+.TextWaning{
+    position: absolute;
+}
+
+
+.TextWaning p{
+    color: #4C596C;
+    font-size: 100px;
+    align-items:flex-start;
+    font-weight: 500;
+}    
+
+.FondoLogin .TextWaning{
+    margin-top: 350px;
+}
+
+
+.FormLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 25px;
+    background-color: rgb(142, 170, 184, 14%);
+    width: 80vw;
+}
+
+.FormBack{
+    background-color: rgb(142, 170, 184, 14%);
+}
+
+
+.Fondo2{
+    background-color: rgb(142, 170, 184, 25%);
+    border-radius: 13px;    
+    border: 3px solid #4c596c;   
+}
+
+.WaningLogin{
+    margin: 0;
+}
+
+.WaningLogin img{
+    display: flex;
+}
+
+
+.WaningLogin p{
+    color: #131416;
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+}
+
+
+.ContLogin{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.ContLogin input{
+    justify-content: center;
+    outline: none;
+    border-radius: 13px;
+    border: 2px solid #4c596c;
+}

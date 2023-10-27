@@ -1,0 +1,68 @@
+/*DISEÑO CSS PARA VISTA DE CREDENCIALES INVALIDAS*/
+
+.ContLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+.ContLogin .icon{
+    position: relative;
+    left: 8%;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.IconVerContra{
+    position: relative;
+    right: 8%;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+}
+
+
+.password-olvido a{
+    text-decoration: none;
+    display: flex;
+    font-size: 15px; 
+    justify-content: end;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    margin-right: 13.5%;
+}
+
+
+.registarse a{
+    text-decoration: none;
+}
+
+.registarse p{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.User{
+    padding: 5px;
+    margin: 5px;
+}
+
+.Contra{
+    position: relative;
+    left: 2%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.Crede-Invalidas{
+    display: flex;
+    font-size: 18px;
+    color: rgb(255, 0, 0);
+    justify-content: center;
+    font-weight: 500;
+}
+
+

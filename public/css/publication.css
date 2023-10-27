@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@600&family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat';
+
+}
+
+
+.principal {
+    height: 86vh;
+    width: 57vw;
+}
+
+.mover{
+    animation: mostrar .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes mostrar {
+    0%{
+        transform: scale(0.5);
+    }
+
+    100%{
+        transform: scale(0.7);
+        
+    }
+}
+
+
+.historia {
+    width: 100%;
+    height: 15%;
+    /* Oculta cualquier contenido que se salga del contenedor */
+    overflow: hidden;
+    border-bottom: 2px solid #8EAAB8;
+}
+
+.perfil {
+    justify-content: center;
+    padding: 10px;
+}
+
+.perfil__usuario {
+    padding-right: 4%;
+    height: 100%;
+    align-items: center;
+    margin-left: auto;
+}
+
+.perfil__imagen {
+    width: 65px;
+    height: 65px;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    /* Escala la imagen para cubrir el círculo sin distorsión */
+    object-fit: cover;
+    /* Crea el borde degradado infinito */
+    background: linear-gradient(to right, #067ff0, #02223f);
+    /* Ancho al 200% para hacerlo infinito */
+    background-size: 200% 100%;
+    /* Inicia la posición desde la izquierda */
+    background-position: -100% 0;
+    animation: desplazamiento 2s linear infinite;
+}
+
+@keyframes desplazamiento {
+    0% {
+        /* Inicia desde la derecha */
+        background-position: 200% 0;
+    }
+
+    100% {
+        /* Regresa a la izquierda */
+        background-position: -100% 0;
+    }
+}
+
+.publicacion {
+    height: 53%;
+    background-color: #fff;
+    position: relative;
+}
+
+.accion {
+    height: 5%;
+    align-items: center;
+    justify-content: center;
+}
+
+.accion__imagen{
+    width: 24px;
+    height: 24px;
+}
+.accion__opcion {
+    width: 30%;
+    justify-content: space-between;
+}
+
+.publicacion__descripcion {
+    height: 28%;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.publicacion__encabezado {
+    height: 35%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.encabezado__cuenta {
+    margin-right: auto;
+}
+
+.perfil__usuario {
+    flex-direction: column;
+    text-align: center;
+    padding: 0 2px;
+}
+
+.texto__publicacion{
+    overflow: hidden;
+}
+#usuario__perfil {
+    flex-direction: row;
+}
+
+.texto__publicacion {
+    color: #131416;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 5%;
+}
+
+.publicacion__encabezado__izquierda {
+    width: 70%;
+    align-items: center;
+    margin-right: auto;
+}
+
+.publicacion__encabezado__derecha {
+    margin-left: auto;
+    align-self: center;
+}
+
+.publicacion__tarjeta {
+    width: 100%;
+    height: 100%;
+    /*centra las cajas vertical y horizontal*/
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta__imagen {
+    background-color: #ddd;
+    width: 60%;
+    height: 50%;
+    border-radius: 4%;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+
+.publicacion.contenedor>div:nth-child(3)>img,
+.publicacion.contenedor>div:nth-child(5)>img {
+    opacity: 0.7;
+}
+
+.publicacion.contenedor>div:nth-child(3)>img:hover,
+.publicacion.contenedor>div:nth-child(5)>img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    z-index: 1;
+    
+}
+
+/*#tarjeta__atras{
+    transform: translateX(-50%) scale(0.7);
+}
+
+#tarjeta__siguiente{
+    transform: translateX(50%) scale(0.7);
+}*/
+
+#tarjeta__seleccionada {
+    /*hace que la imagen sobre sale por encima de la caja*/
+    position: absolute;
+    max-width: 40%;
+    max-height: 85%;
+    width: 40%;
+    height: 85%;
+    opacity: 1;
+}
+
+.flecha__atras {
+    position: absolute;
+    justify-self: center;
+    z-index: 1;
+    left: 25.5%;
+    top: 43%;
+    opacity: 1;
+}
+
+.flecha__atras:hover,
+.flecha__siguiente:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 100%;
+}
+
+
+.flecha__siguiente {
+    position: absolute;
+    justify-self: center;
+    z-index: 1;
+    left: 70%;
+    top: 43%;
+    opacity: 1;
+}
+
+.mover-atras{
+    animation: mostrar .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes mostrar {
+    0%{
+        transform: scale(0.5);
+        
+    }
+
+    100%{
+        transform: scale(0.7);
+        
+    }
+}
+
+.mover-siguiente{
+    animation: mostrar .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes mostrar {
+    0%{
+        transform: scale(0.5);
+    }
+
+    100%{
+        transform: scale(0.7);
+        
+    }
+}
+
+.nombre__cuenta {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.contenido__texto {
+    height: 2%;
+}
+
+.etiqueta__opaco {
+    color: rgba(19, 20, 22, 0.60);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.perfil__sesion{
+    background-color: #777;
+}
+.publicacion__perfil {
+    width: 40px;
+    height: 40px;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.tarjeta__siguiente, .tarjeta__atras{
+    opacity: 0.7;
+}
+
+.navegacion-movil{
+    display: none;
+}
+
+@media (max-width: 1024px){
+    
+    .publicacion.contenedor>div:nth-child(3)>img,
+    .publicacion.contenedor>div:nth-child(5)>img {
+        display: none;
+    }
+
+    #tarjeta__seleccionada, .publicacion__descripcion, .principal{
+        width: 80%;
+        max-width: 80%;
+    }
+    .principal{
+        width: 85vw;
+    }
+    .flecha__atras{
+        left: 1%;
+    }
+
+    .flecha__siguiente{
+        left: 91%;
+    }
+
+    .principal{
+        width: 100vw;
+    }
+    
+    #tarjeta__seleccionada, .publicacion__descripcion{
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 600px){
+    #tarjeta__seleccionada, .publicacion__descripcion{
+        max-width: 90%;
+    }
+
+     .principal{
+        width: 100%;
+        max-width: 100%;
+        height: 90vh;
+    }
+
+    .publicacion__descripcion{
+        height: 23%;
+    }
+
+    
+
+    .nav-movil{
+        width: 80%;
+        margin: auto;
+        justify-content: space-between;
+    }
+
+    .navegacion-movil{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #4C596C;
+        justify-content: space-between;
+        width: 100%;
+        height: 5%;
+    }
+
+}
