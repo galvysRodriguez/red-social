@@ -59,6 +59,9 @@
     border: none;
     margin: auto;
     transition: background-color .3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -94,4 +97,23 @@
     margin: 5px;
 }
 
+@media (max-width: 1024px){
+    body > div > div > div.d-none.d-md-block.col-md-6.p-0.d-flex.justify-content-center.align-items-center{
+        display: none;
+        width: 0;
+    }
 
+    body > div > div > div.col-sm-12.col-md-6.FormBack.d-flex.justify-content-center.align-items-center{
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+}
+
+
+@media (max-width: 600px){
+    body > div > div > div.col-sm-12.col-md-6.FormBack.d-flex.justify-content-center.align-items-center{
+        width: 100vw;
+        margin: 0 auto;
+    }
+}

@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SaveController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\upPublicationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,15 +22,12 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('index');
-});*/
 
 // Ruta para el inicio
 Route::get('/', [PublicacionController::class, 'index']);
 
 // Ruta para la vista de inicio de sesión
-Route::get('/login', [LoginController::class, 'showLogin'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'showLogin'])->middleware('guest')->name('login');
 
 // Ruta para el proceso de inicio de sesión
 Route::post('/login', [LoginController::class, 'login']);
@@ -43,7 +45,24 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPass
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
 
+Route::get('/profile', [ProfileController::class, 'showProfile'])->middleware('auth');
+
+Route::get('/profile/{idEncriptado}', [ProfileController::class, 'showProfileOther'])->name('profile-user');
+
+Route::post('/like', [LikeController::class, 'likes'])->name('likes');
+
+Route::post('/save', [SaveController::class, 'saves'])->name('saves');
+
+Route::post('/follow', [LikeController::class, 'following']);
+
+Route::get('/save', [SaveController::class, 'showSaves'])->middleware('auth');
+
+Route::post('/upPublication', [upPublicationController::class, 'upPublication'])->middleware('auth');
+
+Route::get('/upPublication', [upPublicationController::class, 'showUpPublication'])->middleware('auth');
+
+/*
 Route::post('/update-password', [ForgotPasswordController::class, 'updatePassword']);
 
 // Ruta para enviar el correo electrónico de restablecimiento de contraseña
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');*/

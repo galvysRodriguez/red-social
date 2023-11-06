@@ -24,7 +24,6 @@ body {
     background-color: #4C596C;
     color: #C6D1D8;
     display: flex;
-    overflow: hidden;
 }
 
 .pie{
@@ -65,90 +64,33 @@ body {
 
 
 
-.icono-barra:hover {
-    background-color: #5F788F;
-    border-radius: 15px;
+.icono-barra:hover .contenido__perfil {
+    margin-top: 15px;
+    width: 100%;
+
+    background-color: #fff;
+    height: 50px;
+    color: #000;
+    display: block;
 }
 
 
+
+.icono-barra:hover{
+    margin-top: 20px;
+    height: 8vh;
+}
+.icono-barra:hover .contenido__perfil a{
+    color: #000;
+    text-decoration: none;
+}
 .contenido__perfil{
-    z-index: 10;
+    z-index: 1;
     width: 20%;
     height: 25%;
     display: none;
     text-decoration: none;
-    position: absolute;
-    background-color: #4C596C;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
-    left: 80%;
 }
-
-.opciones__perfil{
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 100%;
-}
-
-#ocultar{
-    display: none;
-}
-
-
-.enlace__perfil{
-    width: 100%;   
-    border-top: 2px solid #C6D1D8;
-    justify-content: center;
-    height: 100%;
-    align-items: center;
-    display: flex;
-}
-
-.enlace__perfil a{
-    text-align: center;
-    text-decoration: none;
-    color: #eee;
-    width: inherit;
-    height: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.enlace__perfil a:hover{
-    background-color: #5F788F;
-}
-
-#btn_iniciar{
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    text-decoration: none;
-    font-size: 1.2rem;
-    width: 60%;
-    height: 50%;
-    margin: auto 5% auto auto;
-    border: 2px solid #fff;
-    text-align: center;
-    border-radius: 15px;
-    display: inline-block;
-    padding-top: 4%;
-}
-
-#btn_iniciar > div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 10px;
-}
-
-#btn_iniciar:hover{
-    background-color: #5F788F;
-}
-
-
 .tendencia {
     height: 45%;
     width: 80%;
@@ -226,7 +168,6 @@ body {
     font-weight: 500;
     line-height: normal;
     padding-left: 6ch;
-    color: #ddd;
 }
 
 .etiqueta__contenido {
@@ -243,13 +184,7 @@ body {
     justify-content: center;
     padding-bottom: 5px;
 }
-.texto__historia {
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-bottom: 5px;
-}
+
 
 .seleccion {
     color: #fff;
@@ -293,15 +228,232 @@ body {
 .encabezado__central {
     width: 57%;
     height: 100%;
+    padding: 10px;
 }
 
 .encabezado__derecho {
     width: 21.5%;
     height: 100%;
     padding-right: 1%;
+}
+
+
+
+.logo {
+    margin-right: 10px;
+}
+
+
+/*-------------HEADER DE SEGUIDORES-------------*/
+.contenedor-seguidores{
+    width: 58vw;
+    overflow-y: scroll;
+    height:87vh;
+}
+
+.seccion-seguidores .titulo-siguiendo,
+.seccion-seguidores {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seccion-seguidores .header-seguidores {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+
+.seccion-seguidores .seguidores {
+    display: block;
+    position: relative;
+    height: 6.5rem;
+
+}
+
+.seccion-seguidores .seguidores .volver-perfil {
+    position: flex;
+    margin-right: 35rem;
+    margin-top: 1rem;
+    
+}
+
+.boton-volver{
+    cursor: pointer;
+    background: none;
+    border: 0;
+    color: inherit;
+}
+
+.seccion-seguidores .titulo-siguiendo{
+    position: relative;
+    max-width: 750px;
+}
+
+.seccion-seguidores .titulo-siguiendo .titu-Sg{
+    width: 100%;
+    font-size: 1.25em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+
+.cont-seguidor{
+    width: 100%;
+    height: 75%;
+    position: relative;
     align-items: center;
     justify-content: center;
 }
+
+.bus-segui{
+    width: 40em;
+    height: 38px;
+    background-color:  rgb(221, 222, 224, 20%);
+    border-radius: 10px;
+    border: 2px solid rgb(184, 199, 206);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left: 6ch;
+    margin-top: 8px;
+}
+
+
+.bus-segui::placeholder {
+    color: rgb(19, 20, 22, 80%);
+    margin: 0 10px;
+}
+
+.bus-segui:active,
+.bus-segui:focus {
+    background-color: rgba(142, 170, 184, 14%);
+    border: 2px solid rgb(19, 20, 22, 60%);
+    outline: none;
+    color: rgb(19, 20, 22, 80%)
+}
+
+.lupa-imagenSg{
+    position: absolute;
+    left: 2%;
+    top: 22%;
+}
+
+/*-------------FIN HEADER SEGUIDORES-----------*/
+
+
+
+/*--------------CUENTAS DE LOS SEGUIDORES-----------*/
+
+
+.cont-segui > div{
+    border-radius: 3px;
+}
+
+.seguidores-3 > a{
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(142, 170, 184);
+}
+
+div{
+    display: block;
+    grid-gap: 8px;
+}
+
+.contPrincipal-segui{
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+
+.cont-segui{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(1, 700px);
+
+}
+
+.seguidores-3{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, 200px);
+
+}
+
+/*-----------FICHA DE CASA USUARIO, FOTO, NOMBRE Y DESCRIPCIÓN----------*/
+
+/*Foto perfil*/
+.seguidores-1{
+    padding: 10px;
+}
+
+.seguidores-1 .foto-segui {
+    display: flex;
+    width: 88px;
+    height: 88px;
+    border: 2px solid rgb(184, 199, 206);
+    background-color: #DFE5F2;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    position: relative;
+    left: calc(50% - 40px);
+    margin-bottom: 10px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.seguidores-1 .foto-segui img {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 50%;
+}
+
+.seguidores-1 .info-segui{
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.seguidores-1 .info-segui .seguir-usuario{
+    color: rgb(19, 20, 22);
+    display: block;
+    width: 100%;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+}
+
+.seguidores-1 .info-segui .boton-seguir{
+    font-size: 1em;
+    color: #DFE5F2;
+    background-color: #1877F2;
+    border: 0px;
+    border-radius: 6px;
+    width: 8em;
+    padding: 4px;
+}
+
+/*color: rgb(19, 20, 22, 0.9);
+background-color: #DFE5F2;*/
+
+/*-----------FIN  FICHA DE CASA USUARIO, FOTO, NOMBRE Y DESCRIPCIÓN----------*/
+
+/*--------------FIN CUENTAs DE LOS SEGUIDORES-----------*/
+
+
+
+.distancia{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 
 
 
@@ -383,12 +535,8 @@ body {
     height: 28px;
 }
 
-a{
-    text-decoration: none;
-}
 .itemMenuSeleccionado {
     align-items: center;
-    
     background-color: rgba(142, 170, 184, 0.25);
     width: 60%;
     height: 36px;
@@ -403,9 +551,7 @@ a{
     line-height: normal;
     box-sizing: content-box;
 }
-.encabezado__mensajes{
-    display: none;
-}
+
 .itemMenu:hover {
     align-items: center;
     background-color: rgba(142, 170, 184, 0.08);
@@ -416,47 +562,31 @@ a{
     margin-top: 10px;
 }
 
+
+
 @media (max-width: 1024px){
+    .contenedor-seguidores{
+        width: 100%;
+        overflow-y: scroll; 
+    }
+    
     .encabezado__izquierdo h1 {
         display: none;
     }
     .encabezado__izquierdo{
         width: 12vw;
-        
-    }
-
-    #btn_iniciar{
-        font-size: 1rem;
-    }
-
-    .icono-barra{
-        height: 3.5vh;
-    }
-    .icono-barra:hover{
-        border-radius: 12px;
-    }
-    .tendencia, .usuarios__interes, .pie{
-        display: none;
     }
     .secundario{
-        width: 0;
+        display: none;
     }
 
     .itemMenu, .itemMenuSeleccionado, .itemMenu:hover{
-        /* Oculta el texto, lo desplaza fuera del área visible */
-        text-indent: -9999px; 
-        /* Oculta cualquier exceso de contenido */
-        overflow: hidden; 
-        /* Evita que el texto se desborde a una nueva línea */
-        white-space: nowrap; 
+        text-indent: -9999px; /* Oculta el texto, lo desplaza fuera del área visible */
+        overflow: hidden; /* Oculta cualquier exceso de contenido */
+        white-space: nowrap; /* Evita que el texto se desborde a una nueva línea */
         padding: 0;       
         margin: 0 auto;
-        margin-top: 15px;
-        justify-content: center;
-      }
-
-     .navegacion{
-         padding: 0;
+        margin-top: 10px;
       }
 
     .icono{
@@ -469,28 +599,36 @@ a{
     }
 
     .encabezado__central{
-        width: 70vw;
+        width: 55vw;
+        padding: 10px;
     }
 
     .encabezado__derecho{
-        width: 18vw;
-        
-    }
-
-    .perfil__usuario{
-        display: flex;
-        justify-self: flex-end;
-    }
-    .perfil__usuario__principal{
-        display: none;
+        width: 21vw;
     }
     
+    .contenedor-perfil{
+        width: 80%;
+    }
+
+    .cont-segui{
+        display: grid;
+        grid-template-columns: repeat(1, 650px);
+    
+        }
+    
+    .seguidores-3{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(200px, 200px);
+    
+    }
+
 }
 
+
+
 @media (max-width: 600px){
-    /*Medidas de height 
-    encabezado 8% 
-    principal 80*/
     .navegacion{
         display: none;
     }
@@ -501,14 +639,13 @@ a{
 
     .encabezado__izquierdo{
         width: 100vw;
-        margin-left: 2%;
-        font-size: 0.6rem;
+        margin-left: 3%;
+        font-size: 0.8rem;
         font-weight: 400;
         margin-top: 1%;
-        
     }
 
-    .encabezado__derecho .perfil__usuario >img,  #btn_iniciar, .icono-barra{
+    .encabezado__derecho{
         display: none;
     }
 
@@ -518,27 +655,91 @@ a{
 
     .encabezado__central{
         width: 35vw;
+        padding: 10px;
     }
 
     .encabezado{
-        height: 9vh;
-        width: 100vw;
-        
+        height: 10vh;
     }
 
-    #usuario__perfil{
-        margin: 0;
-    }
-
-    .encabezado__derecho{
-        margin-right: auto;
-        width: 18vw;
-    }
-    .encabezado__mensajes{
-        display: flex;
-        margin-right: auto;
-        justify-self: flex-start;
-    }
 
 
 }
+
+
+/* adactacion a dispositivos HEADER USUARIO */
+@media (max-width: 750px) {
+
+    .contenedor-seguidores{
+        width: 100%;
+        overflow-y: scroll; 
+        height: 87vh;
+    }
+
+    .distancia{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .seccion-seguidores .header-seguidores .volver-perfil {
+        position: absolute;
+        cursor: pointer;
+    }
+    
+    .seccion-seguidores .titulo-siguiendo .titu-Sg{
+        margin-top: 30px;
+    }
+    
+    
+    .cont-seguidor{
+        width: 100%;
+        height: 75%;
+    }
+    
+    .bus-segui{
+        width: 20em;
+        height: 38px;
+        padding-left: 6ch;
+    }
+
+    .lupa-imagenSg{
+        left: 3%;
+        top: 16%;
+    }
+    
+    .seguidores-1{
+        padding: 5px;
+    }
+    
+    .seguidores-1 .foto-segui {
+        width: 70px;
+        height: 70px;
+        left: calc(50% - 35px);
+    }
+
+    .seguidores-1 .info-segui .seguir-usuario{
+        font-size: 1em;
+        margin-bottom: 0.3rem;
+    }
+    
+    .seguidores-1 .info-segui .boton-seguir{
+        font-size: 0.8em;
+        width: 6em;
+        padding: 4px;
+    }
+
+    .cont-segui{
+    display: grid;
+    grid-template-columns: repeat(1, 360px);
+
+    }
+
+    .seguidores-3{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(150px, 150px);
+
+    }
+
+}
+

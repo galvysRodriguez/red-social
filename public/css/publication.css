@@ -15,8 +15,12 @@ body {
 .principal {
     height: 86vh;
     width: 57vw;
+    overflow: hidden;
 }
 
+#publicacion__fecha{
+    font-size: 0.75rem;
+}
 .mover{
     animation: mostrar .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -32,18 +36,41 @@ body {
     }
 }
 
+.pantalla-completa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.imagen-en-pantalla{
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+}
 
 .historia {
     width: 100%;
-    height: 15%;
+    height: 16%;
     /* Oculta cualquier contenido que se salga del contenedor */
-    overflow: hidden;
+    overflow-x: auto;
     border-bottom: 2px solid #8EAAB8;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
 }
 
 .perfil {
     justify-content: center;
     padding: 10px;
+    overflow: hidden;
+    width: 95%;
 }
 
 .perfil__usuario {
@@ -54,8 +81,8 @@ body {
 }
 
 .perfil__imagen {
-    width: 65px;
-    height: 65px;
+    width: 62px;
+    height: 62px;
     margin: 0 5px;
     border-radius: 50%;
     border: 2px solid transparent;
@@ -83,7 +110,7 @@ body {
 }
 
 .publicacion {
-    height: 53%;
+    height: 52%;
     background-color: #fff;
     position: relative;
 }
@@ -133,6 +160,54 @@ body {
 }
 #usuario__perfil {
     flex-direction: row;
+}
+
+
+.animacion__megusta{
+    visibility: hidden;
+    position: absolute;
+    top: 25%;
+    left: 42%;
+    width: 18%;
+    height: 40%;
+    display: none;
+}
+
+.mostrar__megusta{
+    display: block;
+    animation: aparecer 1s ease-in;
+}
+
+@keyframes aparecer {
+    0%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(15%)
+        
+    }
+
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15%)
+    }
+}
+
+#me-gusta-relleno, #guardados-relleno{
+    display: none;
+}
+
+#me-gusta-relleno, #guardados-relleno{
+    animation: mover 1s ease-in-out;
+}
+
+@keyframes mover {
+    0%{
+        transform: scale(1.1) translateY(-5%);
+    }
+    100%{
+        transform: scale(1) translateY(5%);
+    }
 }
 
 .texto__publicacion {
@@ -204,6 +279,10 @@ body {
     opacity: 1;
 }
 
+.texto__historia{
+    overflow: hidden;
+}
+
 .flecha__atras {
     position: absolute;
     justify-self: center;
@@ -266,6 +345,11 @@ body {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    color: #131416;
+}
+
+.publicacion__interaccion{
+    justify-content: space-between;
 }
 
 .contenido__texto {
@@ -305,15 +389,14 @@ body {
         display: none;
     }
 
-    #tarjeta__seleccionada, .publicacion__descripcion, .principal{
-        width: 80%;
-        max-width: 80%;
-    }
-    .principal{
-        width: 85vw;
-    }
+  
     .flecha__atras{
-        left: 1%;
+        left: 4%;
+    }
+
+    .historia{
+        height: 14%;
+        width: 100%;
     }
 
     .flecha__siguiente{
@@ -321,31 +404,84 @@ body {
     }
 
     .principal{
-        width: 100vw;
+        width: 92vw;
     }
-    
+
     #tarjeta__seleccionada, .publicacion__descripcion{
+        width: 80%;
         max-width: 80%;
+    }
+
+    
+    .animacion__megusta{
+        width: 28%;
+        left: 38%;
+    }
+
+    .accion__opcion{
+        width: 50%;
     }
 }
 
 @media (max-width: 600px){
+    /*Medidas de height 
+    encabezado 9% 
+    principal 91%
+    el principal se divide en 
+    publicacion descripcion 25%
+    navegacion movil 7%
+    tarjeta seleccionada 75%
+    accion 4%
+
+    */
     #tarjeta__seleccionada, .publicacion__descripcion{
         max-width: 90%;
     }
 
+    #tarjeta__seleccionada{
+        height: 75%;
+    }
+    
+    .accion{
+        height: 4%;
+    }
+
+    .flecha__atras{
+        left: 1%;
+    }
+
+    .flecha__siguiente{
+        left: 89%;
+    }
+
+    .animacion__megusta{
+        width: 36%;
+        left: 32%;
+    }
+
      .principal{
-        width: 100%;
-        max-width: 100%;
-        height: 90vh;
+        width: 100vw;
+        height: 91vh;
     }
 
     .publicacion__descripcion{
         height: 23%;
+        
     }
 
-    
+    .historia{
+        height: 15%;
+        
+    }
 
+    .perfil__imagen{
+        height: 48px;
+        width: 48px;
+    }
+
+    .texto__historia{
+        font-size: .8rem;
+    }
     .nav-movil{
         width: 80%;
         margin: auto;
@@ -358,8 +494,30 @@ body {
         align-items: center;
         background-color: #4C596C;
         justify-content: space-between;
-        width: 100%;
-        height: 5%;
+        padding-bottom: 4px;
+        height: 7%;
+        width: 100vw;
+    }
+
+    .etiqueta__opaco{
+        font-size: 0.7rem;
+    }
+
+    #publicacion__fecha{
+        font-size: 0.6rem;
+    }
+
+    .publicacion__perfil{
+        width: 32px;
+        height: 32px;
+    }
+
+    .nombre__cuenta{
+        font-size: 0.9rem;
+    }
+
+    .texto__publicacion{
+        line-height: 0.9;
     }
 
 }

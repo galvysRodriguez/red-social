@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/LoginCss/normalize.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/FormatoLogin.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/ResContra.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/LoginCSS/DisLogin.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/CredeInvalida.css')}}">
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
 </head>
