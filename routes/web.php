@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaveController;
 use App\Http\Controllers\FollowController;
@@ -44,6 +45,10 @@ Route::post('/cerrar', [LoginController::class, 'cerrar']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->middleware('guest');
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+
+Route::get('/update-password/{token}', [UpdatePasswordController::class, 'showUpdatePassword'])->name('password.reset')->middleware('guest');
+
+Route::post('/update-password', [UpdatePasswordController::class, 'updatePassword'])->name('password.update');
 
 Route::get('/profile', [ProfileController::class, 'showProfile'])->middleware('auth');
 
