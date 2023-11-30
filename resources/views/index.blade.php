@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Waning</title>
     <script src="{{ asset('js/splide.min.js') }}"></script>
+    <script src="{{ asset('js/splideAutoScroll.min.js') }}"></script>
+    <script src="{{ asset('js/splideIntersection.min.js') }}"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/publication.css') }}" rel="stylesheet">
     <link href="{{ asset('css/splide.min.css') }}" rel="stylesheet">
@@ -54,55 +57,39 @@
         </nav>
         @include('commom/profile-content')
         <main class="principal">
-        
+            <div id="historias" data-historias="{{ json_encode($historias) }}">
+            </div>
             <div class="historia contenedor">
                 <div class="splide perfil">
                     <div class="splide__track">
                         <div class="splide__list">
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" class="perfil__imagen" title="tu historia">
+                        @if(Auth::user())
+
+                        <div class="splide__slide perfil__usuario contenedor">
+                            @if (optional(Auth::user())->foto_perfil)
+
+                            <img src="{{ asset('images/inicio/mario.png') }}" alt="" class="perfil__imagen perfil__historias" title="tu historia" value="{{Auth::user()->id_usuarios}}">
+                            @else
+
+                            <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" class="perfil__imagen perfil__historias" data-parametro="{{Auth::user()->id_usuarios}}">
+                            @endif
                         <label class="texto__historia">Tu historia</label>
                     </div>
+                    @endif
+                    @foreach($usuarioshistorias as $usuarios)
                     <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
-                    </div>
-                    <div class="splide__slide perfil__usuario contenedor">
-                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen" title="obama">
-                        <label class="texto__historia">Obama</label>
+                        @if (is_null($usuarios->foto_perfil))
+                        <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" class="perfil__imagen perfil__historias" data-parametro="{{$usuarios->id_usuarios}}">
+                        @else
+                        <img src="{{$usuarios->foto_perfil}}" alt="" class="perfil__imagen perfil__historias" title="obama" data-parametro="{{$usuarios->id_usuarios}}">
+                        @endif
+                        <label class="texto__historia">{{$usuarios->nombre_cuenta}}</label>
+                        <div class="cerrar__historias"  style="display:none">
+                            <img src="{{ asset('images/inicio/cerrar.png') }}" alt="">
                         </div>
+                        
+                    </div>
+                    @endforeach
                 </div>
                     </div>
                 </div>
@@ -156,8 +143,10 @@
                 <div class="publicacion__encabezado contenedor">
                     <div class="publicacion__encabezado__izquierda contenedor">
                         <a class="acceder-usuario" href="{{ route('profile-user', ['idEncriptado' => 2]) }}">
-                            <img src="{{ asset('images/inicio/modern-architecture-building-in-the-evening.png') }}" alt=""
-                                class="perfil__imagen publicacion__perfil">
+                            <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" alt=""
+                                id="perfil__publicacion__principal" class="perfil__imagen publicacion__perfil">
+                                <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" alt=""
+                                id="perfil__publicacion__defecto" class="perfil__imagen publicacion__perfil">
                             <div class="encabezado__cuenta">
                         </a>
                             <a class="acceder-usuario" href="{{ route('profile-user', ['idEncriptado' => 2]) }}">
@@ -189,12 +178,15 @@
         </main>
         @include('commom/right-bar')
     </div>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    <script src="{{ asset('js/messageLogin.js') }}"></script>
     <script src="{{ asset('js/likes.js') }}"></script>
     <script src="{{ asset('js/changeImages.js') }}"></script>
     <script src="{{ asset('js/slideHistories.js') }}"></script>
     <script src="{{ asset('js/showHistory.js') }}"></script>
     <script src="{{ asset('js/profileOption.js') }}"></script>
     <script src="{{ asset('js/saves.js') }}"></script>
+    <script src="{{ asset('js/splideStart.js') }}"></script>
 </body>
 
 </html>

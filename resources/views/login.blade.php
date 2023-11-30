@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <title>Inicio de sesion de WANING</title>
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCss/normalize.css')}}">
@@ -25,12 +26,15 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 FormBack d-flex justify-content-center align-items-center" style="display: flex; flex-direction: column;">
-
+            <div  style = "display: flex; margin:auto; flex-direction: column; justify-content:center;">
+                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px; margin:auto;">
+                <h1><a style="color:#4C596C;" href="/">Waning</a></h1>
+            </div>
                 <form method="POST" action="/login" class=" Fondo2 bg-body rounded-13 border border-2 border-original" style="margin:auto;">
                     @csrf
                     <div style="width: 100%; margin-top: 5%;">
                         <div class="formato WaningLogin" style="width: 100%; display: flex; justify-content: center;">
-                            <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}">
+                            <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" >
                         </div>
                         <div class="formato WaningLogin" style="width: 100%; display: flex; justify-content: center;">
                             <p>Inicio de sesión</p>
@@ -64,7 +68,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si todavía no tienes cuenta, <a href="/register"> Registrate</a></p>
+                        <p>Si todavía no tienes cuenta, <a style="margin-left: 2px;" href="/register"> Registrate</a></p>
                     </div>
 
                 </form>

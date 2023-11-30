@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UpPublicationController extends Controller
 {
-    public function upPublication(Request $request){
+    public function upPublication(Request $request)
+    {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
             $descripcion = $request->input('descripcion');
@@ -19,14 +20,15 @@ class UpPublicationController extends Controller
             $archivo->move(public_path('/images/publicacion'), $nombreArchivo);
             DB::select('CALL insertarPublicaciones(?, ?, ?, ?)', array(auth()->user()->id_usuarios, $descripcion, $ubicacion, $nombreArchivo));
             // Otras operaciones si es necesario
-    
+
             return redirect('/');
         } else {
             return redirect()->back()->with('error', 'No se ha seleccionado ningún archivo.');
         }
     }
 
-    public function showUpPublication(){
+    public function showUpPublication()
+    {
         return view('upPublication');
     }
 }

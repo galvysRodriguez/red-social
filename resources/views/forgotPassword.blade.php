@@ -27,7 +27,10 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 FormBack d-flex justify-content-center align-items-center" style="display: flex; flex-direction: column;">
-
+            <div  style = "display: flex; margin:auto; flex-direction: column;">
+                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px; margin:auto;">
+                <h1><a style="color:#4C596C;" href="/">Waning</a></h1>
+            </div>
                 <form method="POST" action="/forgot-password" class=" Fondo2 bg-body rounded-13 border border-3 border-original" style="margin:auto;">
                     @csrf
                     <div style="width: 100%; margin-top: 5%;">
@@ -63,7 +66,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si todavía no tienes cuenta, <a href="/register"> Registrate</a></p>
+                        <p>Si todavía no tienes cuenta, <a style="margin-left: 2px;" href="/register"> Registrate</a></p>
                     </div>
 
                 </form>

@@ -11,7 +11,6 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-
     public function showLogin()
     {
         return view('login');
@@ -19,34 +18,29 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        try
-        {
+        try {
             $validator = Validator::make($request->all(), [
                 'usuario' => 'required|max:125',
-                'contraseña' =>'required|string|min:6|max:50',
-                
+                'contraseña' => 'required|string|min:6|max:50',
+
             ]);
-        
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
-        
-            
+
             $usuario = $request->input('usuario');
             $contraseña = $request->input('contraseña');
             $salida = null;
-            
+
             DB::select('CALL IniciarSesion(?, ?, @salida)', array($usuario, $contraseña));
 
             $resultado = DB::select('SELECT @salida as salida')[0]->salida;
-            if($resultado != null) 
-            {
-                if($resultado == 0) 
-                {
+            if($resultado != null) {
+                if($resultado == 0) {
                     // Error general
                     return redirect()->back()->withErrors(['error login' => 'Credenciales inválidas']);
-                } else 
-                {
+                } else {
                     // Usuario ingresado
                     $user = User::find($resultado);
 
@@ -57,14 +51,10 @@ class LoginController extends Controller
                         return redirect('/');
                     }
                 }
-            } 
-            else 
-            {
+            } else {
                 return redirect()->back()->withErrors(['error-login' => 'Credenciales inválidas']);
-            }     
-        }
-        catch (\Exception $e) 
-        {
+            }
+        } catch (\Exception $e) {
             // Manejo de errores y redirección con mensaje de error
             return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error durante el registro. Por favor, inténtalo de nuevo.']);
         }
@@ -73,11 +63,11 @@ class LoginController extends Controller
     public function cerrar(Request $request)
     {
         // Cierre de sesión
-        Auth::logout(); 
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         // Redirige a la página de inicio u otra página deseada después del cierre de sesión.
-        return redirect('/'); 
+        return redirect('/');
     }
 }

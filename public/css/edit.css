@@ -58,6 +58,7 @@
     justify-content: center;
     align-items: center;
     gap: 2%;
+    height: 30px;
 }
 
 .boton1{
@@ -142,6 +143,32 @@
     align-items: center;
     height: 100%;
     margin-top: 10px;
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+} 
+input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#icono_subir{
+    width: 16px;
+    height: 16px;
+}
+#subir{
+    z-index: 100;
+    cursor: pointer;
+    color: #1877F2;
+    
 }
 
 .botonPublicar{

@@ -74,7 +74,15 @@
                 <!--Botones de Segrui y Mensaje-->
                 <div class="contenedor-SM">
                     <a href="#" class="SM">
-                        <div class="seguir">Seguir</div>
+                        <div  id="seguir" data-seguido="{{ $valSeguido }}" class="seguir">Seguir
+                        @if (Auth::check())
+                        <form id="follow-form" action="{{ route('follows') }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{$usuario->id_usuarios}}" name="id_usuario22">
+                            <input type="hidden" value="{{ Auth::user()->id_usuarios }}" name="id_usuario_personal">
+                        </form>
+                        @endif
+                        </div>
                     </a>
                     <a href="#" class="SM">
                         <div class="mensaje">Mensaje</div>
@@ -116,8 +124,10 @@
         @include('commom/right-bar')
     </div>
     @include('commom/mobile')
+    <script src="{{ asset('js/alert.js') }}"></script>
     <script src="{{ asset('js/follow.js') }}"></script>
     <script src="{{ asset('js/profileOption.js') }}"></script>
+    <script src="{{ asset('js/messageLogin.js') }}"></script>
 </body>
 
 </html>

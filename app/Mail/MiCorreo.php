@@ -11,17 +11,18 @@ use Illuminate\Queue\SerializesModels;
 
 class MiCorreo extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      */
 
-     public $token;
+    public $token;
 
     public function __construct($token)
     {
-         $this->token = $token;
+        $this->token = $token;
     }
 
     /**

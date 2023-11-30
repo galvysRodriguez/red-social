@@ -190,6 +190,78 @@ body {
     text-align: center;
 }
 
+
+.my-slider-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 7px;
+    z-index: 1000;
+  }
+
+  .my-slider-progress-bar {
+   background-color: #fff;
+    height: 100%;
+    transition: width 400ms ease;
+    z-index: 1000;
+    width: 10px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border: solid 1.5px #5F788F;
+  }
+
+  .superior__cerrar{
+    margin-right: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    height: 60px;
+  }
+  .cerrar__historias{
+    position: absolute;
+    z-index: 1000;
+    top: 20px;
+  }
+  #main-slider {
+    margin-top: 0;
+    position: relative;
+    /*width: 400px;
+    height: 400px;*/
+    width: 60vw;
+    height: 60vh;
+  }
+
+  #main-slider .splide__track, #main-slider .splide__track .splide__slide{
+    width: 100% !important;
+    height: 100% !important ;
+  }
+
+  #thumbnail-slider {
+    margin-top: 10px;
+    width: 60vw;
+  }
+
+  
+
+  #thumbnail-slider .splide__slide {
+    border: 2px solid #ccc;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  #thumbnail-slider .my-slider-progress-bar {
+    height: 2px;
+    background: green;
+    z-index: 10;
+  }
+
+  
+  #thumbnail-slider .splide__slide img {
+    max-width: 100%;
+    height: auto;
+    
+  }
+
 .ver-mas {
     color: #1877F2;
     font-size: 0.75rem;
@@ -293,6 +365,7 @@ body {
 .encabezado__central {
     width: 57%;
     height: 100%;
+    padding: 10px;
 }
 
 .encabezado__derecho {
@@ -332,7 +405,7 @@ body {
     margin: auto 0;
 }
 
-.etiqueta:hover{
+.seleccion{
     background-color: #5F788F;
     border-radius: 4px;
     cursor: pointer;
@@ -506,6 +579,15 @@ a{
         font-weight: 400;
         margin-top: 1%;
         
+    }
+
+    #main-slider{
+        width: 90vw;
+        height: 60vh;
+    }
+
+    #thumbnail-slider{
+        width: 90vw;
     }
 
     .encabezado__derecho .perfil__usuario >img,  #btn_iniciar, .icono-barra{

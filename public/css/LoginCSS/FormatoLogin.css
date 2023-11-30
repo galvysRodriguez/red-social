@@ -22,6 +22,12 @@ form{
     max-height: 1000px;
 }
 
+a{
+    text-decoration: none;
+    
+}
+
+
 /*--------------------------------*/
 /*separador y divisor, hacen que los dos fondos no se toquen y se mantengan en su lugar con sus recpectivos elementos*/
 .separador{

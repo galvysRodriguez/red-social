@@ -354,7 +354,7 @@ body {
     border-radius: 3px;
 }
 
-.seguidores-3 > a{
+.seguidores-3  >div{
     text-decoration: none;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -428,6 +428,17 @@ div{
     width: 100%;
     font-size: 1.1em;
     margin-bottom: 1rem;
+}
+
+.seguir{
+    font-size: 1em;
+    color: #DFE5F2;
+    background-color: #1877F2;
+    border: 0px;
+    border-radius: 6px;
+    width: 8em;
+    padding: 4px;
+    margin: auto;
 }
 
 .seguidores-1 .info-segui .boton-seguir{

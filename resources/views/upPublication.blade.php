@@ -65,11 +65,19 @@
             <a href="/"><img src="{{ asset('images/Iconos/equis.png') }}" width="24"></a>
     
 </div>
+<div style="display:flex; align-items:center; justify-content:center;">
+<h1 >Cargar publicacion</h1>
+</div>
 
-<div class="publicarContenedor2" style="height: 40%; margin-top: 3%;">
-    <div class="insertarImg">
-        <h4> Inserte la Imagen </h4>
-        <input type="file" name="archivo" id="archivo" accept="image/*">
+<div style="display:flex; align-items:center; justify-content:center; margin-top:10px;">
+        <input type="file" name="archivo" id="archivo" accept="image/*" onchange="mostrarImagen()">
+        <label id="subir" for="archivo">Seleccionar Archivo</label>
+</div>
+        
+
+<div  class="publicarContenedor2" style="height: 40%; margin-top: 3%;">
+    <div id="contenedorImagen" class="insertarImg" style="heigth:100%;display:flex; flex-direction:column;">
+        <h4>Inserte la imagen</h4>
     </div>
 </div>
 

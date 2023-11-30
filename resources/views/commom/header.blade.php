@@ -9,8 +9,8 @@
                 <span class="lupa__imagen"><img src="{{ asset('images/inicio/lupa busqueda.svg') }}" alt=""></span>
             </div>
             <div class="central__etiqueta contenedor">
-                <div class="etiqueta contenedor">
-                    <label class="etiqueta__contenido seleccion">Para ti</label>
+                <div class="etiqueta seleccion contenedor">
+                    <label class="etiqueta__contenido">Para ti</label>
                 </div>
                 <div class="etiqueta contenedor">
                     <label class="etiqueta__contenido">Siguiendo</label>
@@ -28,7 +28,11 @@
                
                     
                 </div>
-                <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil" class="perfil__imagen perfil__sesion">
+                @if (optional(Auth::user())->foto_perfil)
+                    <img src="{{ Auth::user()->foto_perfil }}" alt="" class="perfil__imagen perfil__sesion" title="foto de perfil">
+                @else
+                    <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" class="perfil__imagen perfil__sesion">
+                @endif
                 <div class="icono-barra">
                     <img src="{{ asset('images/inicio/barra desplegable.svg') }}" alt="" class="barra__perfil" id="mostrar">
                     <img src="{{ asset('images/inicio/subir-opciones.svg') }}" alt="" class="barra__perfil" id="ocultar">

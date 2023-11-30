@@ -12,6 +12,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaveController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\upPublicationController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\EditProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +25,12 @@ use App\Http\Controllers\upPublicationController;
 |
 */
 
+Route::get('/aa', [HistoryController::class, 'showHistory']);
 
 // Ruta para el inicio
 Route::get('/', [PublicacionController::class, 'index']);
+
+Route::post('/showLikesAndSaves', [PublicacionController::class, 'showLikes'])->name('showLikes');
 
 // Ruta para la vista de inicio de sesión
 Route::get('/login', [LoginController::class, 'showLogin'])->middleware('guest')->name('login');
@@ -40,6 +45,10 @@ Route::get('/register', [RegisterController::class, 'showRegister'])->middleware
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::post('/cerrar', [LoginController::class, 'cerrar']);
+
+Route::get('/editProfile', [EditProfileController::class, 'showEditProfile'])->middleware('auth');
+
+Route::post('/editProfile', [EditProfileController::class, 'editProfile'])->name('editProfile');
 
 // Ruta para la vista de restablecimiento de contraseña
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->middleware('guest');
@@ -58,9 +67,13 @@ Route::post('/like', [LikeController::class, 'likes'])->name('likes');
 
 Route::post('/save', [SaveController::class, 'saves'])->name('saves');
 
-Route::post('/follow', [LikeController::class, 'following']);
+Route::post('/follow', [FollowController::class, 'follows'])->name('follows');
+
+Route::get('/follow', [FollowController::class, 'showFollow']);
 
 Route::get('/save', [SaveController::class, 'showSaves'])->middleware('auth');
+
+Route::post('/history-profile',[HistoryController::class, 'showHistoryProfile']);
 
 Route::post('/upPublication', [upPublicationController::class, 'upPublication'])->middleware('auth');
 

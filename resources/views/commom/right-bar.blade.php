@@ -5,7 +5,7 @@
                 <a href="#" class="tendencia__enlace">naturaleza</a>
                 <a href="#" class="tendencia__enlace">naturaleza</a>
                 <a href="#" class="tendencia__enlace">naturaleza</a>
-                <span class="ver-mas">Ver más</span>
+                <a class="ver-mas">Ver más</a>
             </div>
             <div class="usuarios__interes">
                 <h4>Usuarios de interes</h4>
@@ -25,7 +25,7 @@
                     <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
                     <a href="#" class="tendencia__enlace">Interes</a>
                 </div>
-                <span class="ver-mas">Ver más</span>
+                <a href="/follow" class="ver-mas">Ver más</a>
             </div>
             <footer class="pie">
                 <p class="texto-pie">Copyright 2023 Waining red social N.Rodriguez, M.Villarroel, G.Rodriguez</p>

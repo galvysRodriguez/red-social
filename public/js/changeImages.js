@@ -20,7 +20,8 @@ const idPublicacion = document.getElementById('id_publicacion_hidden')
 const idPublicacion2 = document.getElementById('id_publicacion_hidden2')
 const meGustaForm = document.getElementById('like-form')
 const guardadosForm = document.getElementById('save-form')
-
+const perfilPublicacion = document.getElementById('perfil__publicacion__principal')
+const perfilPublicacionDefecto = document.getElementById('perfil__publicacion__defecto')
 const publicaciones = JSON.parse(publicacionesElemento.dataset.publicaciones)
 
 class listaImagenes{
@@ -121,8 +122,22 @@ function asignacionImagenes(){
     nombreUsuario.textContent = '@' +imagenesCarrusel.getActual().nombre_usuario
     verComentario.textContent = asignarComentario(imagenesCarrusel.getActual().numComentarios)
     verMeGusta.textContent = asignarNumMeGusta(imagenesCarrusel.getActual().numGustos)
-    idPublicacion.setAttribute('value', imagenesCarrusel.getActual().id_publicaciones)
-    idPublicacion2.setAttribute('value', imagenesCarrusel.getActual().id_publicaciones)
+    if(imagenesCarrusel.getActual().foto_perfil !== null){
+        perfilPublicacion.style.display = 'block'
+        perfilPublicacion.src = imagenesCarrusel.getActual().foto_perfil
+        perfilPublicacionDefecto.style.display = 'none'
+    }
+    else{
+        perfilPublicacion.style.display = 'none'
+        perfilPublicacionDefecto.style.display = 'block'
+    }
+
+    if(idPublicacion != null){
+        idPublicacion.setAttribute('value', imagenesCarrusel.getActual().id_publicaciones)
+        idPublicacion2.setAttribute('value', imagenesCarrusel.getActual().id_publicaciones)
+        pedirMeGusta(imagenesCarrusel.getActual().id_publicaciones)
+    }
+    
     let nuevaURL = "/profile/" + imagenesCarrusel.getActual().id_usuarios
     cambiarDireccion.forEach(elemento => {
         elemento.setAttribute('href', nuevaURL)
@@ -154,9 +169,14 @@ function animarMeGusta(){
 }
 
 function pintarMeGusta(){
-    meGustaRelleno.style.display = 'inline'
-    meGusta.style.display = 'none'
-    submitForm()
+    if(idPublicacion != null){
+        meGustaRelleno.style.display = 'inline'
+        meGusta.style.display = 'none'
+        submitForm()
+    }
+    else
+        mensajeAlertaIniciado("me gusta")
+   
 }
 
 function despintarMeGusta(){
@@ -166,9 +186,14 @@ function despintarMeGusta(){
 }
 
 function pintarGuardados(){
-    guardadosRelleno.style.display = 'inline'
-    guardados.style.display = 'none'
-    submitFormSaves()
+    if(idPublicacion2 != null){
+        guardadosRelleno.style.display = 'inline'
+        guardados.style.display = 'none'
+        submitFormSaves()
+    }
+    else
+        mensajeAlertaIniciado("guardado")
+    
 }
 
 function despintarGuardados(){

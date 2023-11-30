@@ -27,7 +27,10 @@
             </div>
 
             <div class="col-sm-12 col-md-6 FormBack d-public/inicio_sesion/Registro.html public/inicio_sesion/Login.html justify-content-center align-items-center" style="display: flex; flex-direction: column;">
-
+            <div  style = "display: flex; margin:auto; flex-direction: column;">
+                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px; margin:auto;">
+                <h1><a style="color:#4C596C;" href="/">Waning</a></h1>
+            </div>
                 <form method="POST" action="/register" class="col-10 Fondo2 bg-body rounded-2 border border-1 border-black" style="margin:auto;">
                     @csrf
                     <div style="width: 100%; margin-top: 5%;">
@@ -86,7 +89,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si ya tienes cuenta, <a href="/login">Inicia sesion</a></p>
+                        <p>Si ya tienes cuenta, <a style="margin-left: 2px;" href="/login">Inicia sesion</a></p>
                     </div>
 
                 </form>

@@ -8,77 +8,46 @@
     <title>Waning</title>
     <link href="{{ asset('css/PerfilCSS/followers.css') }}" rel="stylesheet">
     <link href="{{ asset('css/publication.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
 </head>
 
 <body>
-    <header class="encabezado contenedor">
-        <div class="encabezado__izquierdo contenedor">
-            <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo">
-            <h1>Waning</h1>
-        </div>
-        <div class="encabezado__central">
-            <div class="central__busqueda contenedor">
-                <input type="text" class="buscador" placeholder="Búsqueda">
-                <span class="lupa__imagen"><img src="{{ asset('images/inicio/lupa busqueda.svg') }}" alt=""></span>
-            </div>
-            <div class="central__etiqueta contenedor">
-                <div class="etiqueta contenedor">
-                    <label class="etiqueta__contenido seleccion">Para ti</label>
-                </div>
-                <div class="etiqueta contenedor">
-                    <label class="etiqueta__contenido">Siguiendo</label>
-                </div>
-                
-            </div>
-
-        </div>
-        <div class="encabezado__derecho contenedor">
-            <div class="perfil__usuario contenedor" id="usuario__perfil">
-                <div class="perfil__usuario__principal">
-                @if (Auth::check())
-                    <h3>{{ Auth::user()->nombre_cuenta }}</h3>
-                @else
-                    <h3>Usuario</h3>
-                @endif
-                    
-                </div>
-                <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil" class="perfil__imagen perfil__sesion">
-                <div class="icono-barra">
-                    <img src="{{ asset('images/inicio/barra desplegable.svg') }}" alt="" class="barra__perfil">
-                    <div class="contenido__perfil">
-                        @guest
-                        <a href="/login">Iniciar Sesion</a>
-                        @else
-                            <form method="POST" action="/cerrar" >
-                            @csrf
-                                <a href="#" onclick="this.closest('form').submit()">Cerrar Sesion</a>
-                            </form>
-                        
-                        @endguest
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </header>
+    @include('commom/header')
     <div class="contenedor caja">
         <nav class="navegacion">
             <div class="menu_arriba">
-                <div class="contenedor itemMenuSeleccionado"> <img src="{{ asset('images/iconos de index/casa.png') }}" class="icono">
-                    &nbsp; &nbsp; Inicio </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/usuario.png') }}" class="icono"> &nbsp; &nbsp;
-                    Perfil </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
-                    &nbsp; Notificaciones </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/megafono.png') }}" class="icono"> &nbsp; &nbsp;
-                    Publicar </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
-                    Mensajes </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardados.png') }}" class="icono"> &nbsp; &nbsp;
-                    Guardados </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/configuraciones.png') }}" class="icono"> &nbsp;
-                    &nbsp; Configuraciones </div>
+            <a href="/">
+                <div class="contenedor itemMenuSeleccionado"> 
+                        <img src="{{ asset('images/iconos de index/iconos rellenos/casita-relleno.png') }}" class="icono">
+                        &nbsp; &nbsp; Inicio  
+                    </div>
+                </a>
+                <a href="/profile">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/usuario.png') }}" class="icono"> &nbsp; &nbsp;
+                     Perfil 
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
+                    &nbsp; Notificaciones 
+                    </div>
+                </a>
+                <a href="/upPublication">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/megafono.png') }}" class="icono"> &nbsp; &nbsp;
+                        Publicar 
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
+                        Mensajes 
+                    </div>
+                </a>
+                <a href="/save">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardar-instagram.png') }}" class="icono"> &nbsp; &nbsp;
+                        Guardados
+                    </div>
+                </a> 
             </div>
         </nav>
 
@@ -94,7 +63,7 @@
                             </button>
                         </div>
                         <div class="titulo-siguiendo">
-                            <h2 class="titu-Sg">Siguiendo</h2>
+                            <h2 class="titu-Sg">{{$mensaje}}</h2>
                         </div>
                         <div class="cont-seguidor">
                             <input type="text" class="bus-segui" placeholder="Búsqueda">
@@ -111,221 +80,51 @@
                 <div class="contPrincipal-segui">
                     <div class="cont-segui">
                         <div class="seguidores-3">
-                            <a href="#" class="linkSegui">
+                            @foreach($usuarios as $usuario)
+                            <div>
+                                  <a href="{{ route('profile-user', ['idEncriptado' => $usuario->id_usuarios]) }}" class="linkSegui">
                                 <div class="seguidores-1">
                                     <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
+                                    @if (is_null($usuario->foto_perfil))
+                                        <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" >
+                                    @else
+                                        <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="">
+                                    @endif
                                     </div>
                                     <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
+                                        <h2 class="seguir-usuario">{{$usuario->nombre_cuenta}}</h2>
+                                        </a>
                                         <div class="seguir">
+                                            <!--Cuenta de los seguidores-
+                                             @if (Auth::check())
+                                            <form class="follow-form" action="{{ route('follows') }}" method="POST" style="visibility: hidden;">
+                                            @csrf
+                                            <input type="hidden" value="{{$usuario->id_usuarios}}" name="id_usuario_{{$usuario->id_usuarios}}">
+                                            </form>
+                                         @endif-->
+                                       
                                             <button type="button" class="boton-seguir">Seguir</button>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="seguidores-3">
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="seguidores-3">
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="seguidores-3">
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="linkSegui">
-                                <div class="seguidores-1">
-                                    <div class="foto-segui">
-                                        <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
-                                    </div>
-                                    <div class="info-segui">
-                                        <h2 class="seguir-usuario">Persona 1</h2>
-                                        <div class="seguir">
-                                            <button type="button" class="boton-seguir">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                
+                            </div>
+                          
+                            
+                           
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </section>
-
-            <div class="navegacion-movil contenedor">
-                <div class="nav-movil contenedor">
-                    <div class="itemMenuSeleccionado-movil"> <img src="{{ asset('images/iconos de index/casa-blanco.png') }}" class="icono">
-                   </div>
-                    <div> <img src="{{ asset('images/iconos de index/buscar.png') }}" class="icono">
-                   </div>
-                    <div> <img src="{{ asset('images/iconos de index/notificacion-blanco.png') }}" class="icono"></div>
-                    <div> <img src="{{ asset('images/iconos de index/usuario-blanco.png') }}" class="icono">
-                    </div>
-                </div> 
-            </div>
+            @include('commom/mobile')
         </main>
-
-        <aside class="secundario contenedor">
-            <div class="tendencia contenedor">
-                <h4>Tendencias</h4>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <span class="ver-mas">Ver más</span>
-            </div>
-            <div class="usuarios__interes">
-                <h4>Usuarios de interes</h4>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <span class="ver-mas">Ver más</span>
-            </div>
-            <footer class="pie">
-                <p class="texto-pie">Copyright 2023 Waining red social N.Rodriguez, M.Villarroel, G.Rodriguez</p>
-            </footer>
-        </aside>
+        @include('commom/right-bar')
     </div>
-    <script src="{{ asset('js/changeImages.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    <script src="{{ asset('js/follow.js') }}"></script>
+    <script src="{{ asset('js/profileOption.js') }}"></script>
+    <script src="{{ asset('js/messageLogin.js') }}"></script>
 </body>
 
 </html>

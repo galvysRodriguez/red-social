@@ -14,11 +14,11 @@ class UserController extends Controller
         $results = DB::select('SELECT * FROM cargarPublicaciones');
 
         // Mostrar los resultados
-        foreach ($results as $result) 
+        foreach ($results as $result)
         {
             // Acceder a las propiedades del resultado
             echo $result->id_publicaciones;
         }*/
     }
-    
+
 }

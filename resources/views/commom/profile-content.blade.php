@@ -3,7 +3,7 @@
                     <form method="POST" action="/cerrar" class="opciones__perfil contenedor">
                         @csrf
                         <div class="contenedor enlace__perfil">
-                            <a href="#">Editar perfil</a>
+                            <a href="/editProfile">Editar perfil</a>
                         </div>    
                         <div class="contenedor enlace__perfil">
                             <a href="#">Convertirse a premium</a>

@@ -62,7 +62,11 @@
                             </button>
                         </div>
                         <div class="foto-perfil">
-                            <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil">
+                            @if (optional(Auth::user())->foto_perfil)
+                                <img src="{{ Auth::user()->foto_perfil }}" alt="" title="foto de perfil" style="width:100%; height:100%;">
+                            @else
+                                <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" style="width:100%; height:100%;">
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -115,31 +119,7 @@
         </main>
         @include('commom/right-bar')
     </div>
-    <div id="contenido-movil" class="contenido__perfil">
-                @if(Auth::check())
-                    <form method="POST" action="/cerrar" class="opciones__perfil contenedor">
-                        @csrf
-                        <div class="contenedor enlace__perfil">
-                            <a href="#">Editar perfil</a>
-                        </div>   
-                        <div class="contenedor enlace__perfil">
-                            <a href="/save">Guardados</a>
-                        </div>
-                        <div class="contenedor enlace__perfil">
-                            <a href="/upPublication">Publicar</a>
-                        </div> 
-                        <div class="contenedor enlace__perfil">
-                            <a href="#">Convertirse a premium</a>
-                        </div>   
-                        <div class="contenedor enlace__perfil">
-                            <a href="#">Configuraciones</a>
-                        </div>   
-                        <div class="contenedor enlace__perfil">
-                            <a href="#" onclick="this.closest('form').submit()">Cerrar Sesion</a>
-                        </div>    
-                    </form>
-                @endif
-            </div>
+    @include('commom/optionProfile')
     @include('commom/mobile')
     <script src="{{ asset('js/menuMovil.js') }}"></script>
     <script src="{{ asset('js/profileOption.js') }}"></script>

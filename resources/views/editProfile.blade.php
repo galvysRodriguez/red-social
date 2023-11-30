@@ -9,13 +9,14 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/publication.css') }}" rel="stylesheet">
     <link href="{{ asset('css/edit.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/PerfilCSS/perfil.css') }}" rel="stylesheet">
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
-
-    <script src="{{ asset('js/publicar.js') }}"></script>
+    <!-- <script src="{{ asset('js/publicar.js') }}"></script>-->
 </head>
 
-<body onload="init()">
+<body  onload="init()">
     
+  <!-- 
         <form class="fondo" id="publicarFondo" action="/upPublication" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="ventana">
@@ -42,151 +43,101 @@
 </div>
 
 </div>
-        </form>
+        </form>-->
      
-    <header class="encabezado contenedor">
-        <div class="encabezado__izquierdo contenedor">
-            <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo">
-            <h1>Waning</h1>
-        </div>
-        <div class="encabezado__central">
-            <div class="central__busqueda contenedor">
-                <input type="text" class="buscador" placeholder="Búsqueda">
-                <span class="lupa__imagen"><img src="{{ asset('images/inicio/lupa busqueda.svg') }}" alt=""></span>
-            </div>
-            <div class="central__etiqueta contenedor">
-                <div class="etiqueta contenedor">
-                    <label class="etiqueta__contenido seleccion">Para ti</label>
-                </div>
-                <div class="etiqueta contenedor">
-                    <label class="etiqueta__contenido">Siguiendo</label>
-                </div>
-                
-            </div>
-
-        </div>
-        <div class="encabezado__derecho contenedor">
-            <div class="perfil__usuario contenedor" id="usuario__perfil">
-                <div class="perfil__usuario__principal">
-                @if (Auth::check())
-                    <h3>{{ Auth::user()->nombre_cuenta }}</h3>
-                @else
-                    <h3>Usuario</h3>
-                @endif
-                    
-                </div>
-                <img src="{{ asset('images/inicio/mario.png') }}" alt="" title="foto de perfil" class="perfil__imagen perfil__sesion">
-                <div class="icono-barra">
-                    <img src="{{ asset('images/inicio/barra desplegable.svg') }}" alt="" class="barra__perfil">
-                    <div class="contenido__perfil">
-                        @guest
-                        <a href="/login">Iniciar Sesion</a>
-                        @else
-                            <form method="POST" action="/cerrar" >
-                            @csrf
-                                <a href="#" onclick="this.closest('form').submit()">Cerrar Sesion</a>
-                            </form>
-                        
-                        @endguest
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </header>
+    @include('commom/header')
     <div class="contenedor caja">
         <nav class="navegacion">
             <div class="menu_arriba">
-                <div class="contenedor itemMenuSeleccionado"> <img src="{{ asset('images/iconos de index/casa.png') }}" class="icono">
-                    &nbsp; &nbsp; Inicio </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/usuario.png') }}" class="icono"> &nbsp; &nbsp;
-                    Perfil </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
-                    &nbsp; Notificaciones </div>
-                <div class="contenedor itemMenu" onclick="publicar()"> <img src="{{ asset('images/iconos de index/megafono.png') }}" class="icono"> &nbsp; &nbsp;
-                    Publicar </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
-                    Mensajes </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardados.png') }}" class="icono"> &nbsp; &nbsp;
-                    Guardados </div>
-                <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/configuraciones.png') }}" class="icono"> &nbsp;
-                    &nbsp; Configuraciones </div>
+            <a href="/">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/casa.png') }}" class="icono">
+                        &nbsp; &nbsp; Inicio  
+                    </div>
+                </a>
+                <a href="/profile">
+                    <div class="contenedor itemMenuSeleccionado">
+                         <img src="{{ asset('images/iconos de index/iconos rellenos/usuario-relleno.png') }}" class="icono"> &nbsp; &nbsp;
+                     Perfil 
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
+                    &nbsp; Notificaciones 
+                    </div>
+                </a>
+                <a href="/upPublication">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/megafono.png') }}" class="icono"> &nbsp; &nbsp;
+                        Publicar 
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
+                        Mensajes 
+                    </div>
+                </a>
+                <a href="/save">
+                    <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardar-instagram.png') }}" class="icono"> &nbsp; &nbsp;
+                        Guardados
+                    </div>
+                </a> 
             </div>
         </nav>
+        @include('commom/profile-content')
         <main class="principal">
-            
+        
             <div class="menuSuperior">
-                <img src="{{ asset('images/Iconos/desplegar-menu.png') }}" alt="Menu">
+                <button type="button" id="boton-menu" class="boton-menu">
+                    <img src="{{ asset('images/ImgPerfil/desplegar-menu.png')}}" alt="" title="Menu desplegable">
+                </button>
             </div>
-
+            <h2 class="texto"> Editar Perfil <h2>
             <div class="perfil">
-                <form>
+                <form method="POST" action="/editProfile" enctype="multipart/form-data">
+                @csrf
+                    
 
-                    <h2 class="texto"> Editar Perfil <h2>
-
-                    <div class="imgPerfil">
-                        <img src="{{ asset('images/imgPerfil/fotoPerfil.png') }}" alt="Perfil">
+                    <div class="imgPerfil" style="display:flex; flex-direction:column;">
+                        @if (is_null($usuario->foto_perfil))
+                            <img id="imagen-perfil" src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" >
+                        @else
+                            <img src="{{ Auth::user()->foto_perfil }}"  class="perfil__imagen" alt="">
+                            
+                        @endif
+                            <input type="file" name="archivo" id="archivo" accept="image/*" onchange="mostrarImagenPerfil()">
+                            <label id="subir" for="archivo">
+                                <img id="icono_subir" src="{{ asset('images/iconos de index/mas.png')}}" alt="">
+                            </label>
                     </div>
 
                     <div class="camposContenedor">
-                        <input type="text" placeholder="Nombre de Usuario" class="campos">
+                        <input name="nombre_usuario" type="text" placeholder="Nombre de Usuario" class="campos">
                     </div>
 
                     <div class="camposContenedor">
-                        <input type="text" placeholder="Nombre de la Cuenta" class="campos">
+                        <input name="nombre_cuenta" type="text" placeholder="Nombre de la Cuenta" class="campos">
                     </div>
 
                     <div class="camposContenedor">
-                       <textarea type="text" placeholder="Descripción" rows="5" class="campos"></textarea>
+                       <textarea name="descripcion" type="text" placeholder="Descripción" rows="5" class="campos"></textarea>
                     </div>
 
                     <div class="botonesContenedor">
                         <div class="botonesAlineacion">
                             <input type="button" value="Descartar" class="boton1">
-                            <input type="button" value="Guardar" class="boton2">
+                            <input type="submit" value="Guardar" class="boton2">
                         </div>
                     </div>
 
                 </form>
 
             </div>
-
+            @include('commom/mobile')
         </main>
-        <aside class="secundario contenedor">
-            <div class="tendencia contenedor">
-                <h4>Tendencias</h4>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <a href="#" class="tendencia__enlace">naturaleza</a>
-                <span class="ver-mas">Ver más</span>
-            </div>
-            <div class="usuarios__interes">
-                <h4>Usuarios de interes</h4>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <div class="perfil__interes contenedor">
-                    <img src="{{ asset('images/inicio/foto perfil obama.jfif') }}" alt="" class="perfil__imagen__interes" title="interes">
-                    <a href="#" class="tendencia__enlace">Interes</a>
-                </div>
-                <span class="ver-mas">Ver más</span>
-            </div>
-            <footer class="pie">
-                <p class="texto-pie">Copyright 2023 Waining red social N.Rodriguez, M.Villarroel, G.Rodriguez</p>
-            </footer>
-        </aside>
-    </div>
-    <script src="{{ asset('js/changeImages.js') }}"></script>
+        @include('commom/optionProfile')
+        @include('commom/right-bar')
+        <script src="{{ asset('js/menuMovil.js') }}"></script>
+        <script src="{{ asset('js/publicar.js') }}"></script>
+        <script src="{{ asset('js/profileOption.js') }}"></script>
 </body>
 
 </html>
