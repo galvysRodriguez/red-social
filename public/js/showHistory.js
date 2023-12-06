@@ -1,6 +1,8 @@
 const contenedorHistorias = document.getElementById('historias')
 const perfilesHistorias = document.querySelectorAll('.perfil__historias')
 const cerrarHistorias = document.querySelector('.cerrar__historias')
+const caja = document.querySelector('.principal')
+const subirHistoria = document.querySelector('.historia-subir')
 
 
 function mostrarHistoria(datos) {
@@ -119,12 +121,12 @@ function mostrarHistoria(datos) {
     
         var mainImage = document.createElement('img');
         
-        mainImage.src = historia.archivo;
+        mainImage.src = historia.contenido;
         mainSlide.appendChild(mainImage);
         var thumbnailSlide = document.createElement('li');
         thumbnailSlide.classList.add('splide__slide');
         var thumbnailImage = document.createElement('img');
-        thumbnailImage.src = historia.archivo;
+        thumbnailImage.src = historia.contenido;
         thumbnailSlide.appendChild(thumbnailImage);
 
        
@@ -152,17 +154,17 @@ function mostrarHistoria(datos) {
     
 
     
-    document.body.appendChild(pantallaCompleta)
-    document.body.appendChild(superior)
+    caja.appendChild(pantallaCompleta)
+    caja.appendChild(superior)
     mostrarSplide(mainSlider, thumbnailSlider, progressBarInner)
 
     cerrarHistorias.addEventListener('click', function() {
         // Verificar si el nodo a eliminar es un hijo del body
-        if (document.body.contains(pantallaCompleta)) {
-            document.body.removeChild(pantallaCompleta);
+        if (caja.contains(pantallaCompleta)) {
+            caja.removeChild(pantallaCompleta);
         }
-        if(document.body.contains(superior))
-            document.body.removeChild(superior)
+        if(caja.contains(superior))
+            caja.removeChild(superior)
     });
     
 
@@ -181,45 +183,131 @@ for(let i = 0; i<historias.length; i++){
 function llamarHistorias(elemento){
     
     var parametro = elemento.dataset.parametro
-    console.log(parametro)
-    // Obtener el token CSRF desde el meta tag en tu documento HTML
-    var token = document.head.querySelector('meta[name="csrf-token"]').content;
-    var xhr = new XMLHttpRequest()
-    xhr.open('POST', '/history-profile', true)
-    // Configurar el encabezado con el token CSRF
-    xhr.setRequestHeader('X-CSRF-TOKEN', token);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        if (xhr.status == 200) {
-            // Realiza las operaciones necesarias con la respuesta, si la hay
-            var respuestaJSON = xhr.responseText;
+    var token = $('meta[name="csrf-token"]').attr('content')
+    
+        $.ajax({
+             
+            url: '/history-profile',
+            type: 'POST',
+            dataType: 'json',
+            data: { parametro:parametro },
+            beforeSend:function(xhr){
+                xhr.setRequestHeader('X-CSRF-TOKEN', token)
+            },
+            success: function(response) {
+                mostrarHistoria(response)
+                // Maneja la respuesta JSON aquí
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
 
-            respuesta = JSON.parse(respuestaJSON);
-
-            // Recorrer los datos utilizando un bucle forEach
-            mostrarHistoria(respuesta)
-
-        }
-    };
-    xhr.send('parametro=' + encodeURIComponent(parametro));
 }
+function mostrarImagen() {
+    const input = document.getElementById('archivo');
+    const imagenContainer = document.getElementById('contenedorImagen');
 
-/*
-document.addEventListener('DOMContentLoaded', function() {
-    const historiasPerfiles = document.querySelectorAll('.splide__slide > img')
-    console.log(historiasPerfiles) // Asegúrate de que esto imprima una lista de elementos img
-    perfilesHistorias.forEach(function(elemento) {
-        elemento.addEventListener('click', llamarHistorias(elemento));
-    });
-    // Resto de tu código aquí
-});*/
+    // Limpiar el contenedor antes de mostrar una nueva imagen
+    imagenContainer.innerHTML = '';
 
+    const files = input.files;
+
+    if (files.length > 0) {
+        const imagen = document.createElement('img');
+        imagen.src = URL.createObjectURL(files[0]);
+        imagen.style.width = "50%";
+        imagen.style.height = imagenContainer.style.height;
+        imagen.alt = 'Imagen cargada';
+        imagenContainer.appendChild(imagen);
+    }
+    else{
+        const texto = document.createElement('h4');
+        texto.textContent = "Inserte la imagen";
+        imagenContainer.appendChild(texto);
+    }
+}
+function mostrarInsertarHistorias(){
+     // Crea el elemento form
+     var formulario = document.createElement('form');
+     formulario.classList.add('fondo');
+     formulario.id = 'publicarFondo';
+     formulario.action = '/upHistory';
+     formulario.method = 'POST';
+     formulario.enctype = 'multipart/form-data';
+     formulario.style.height = '85%'
+     formulario.style.width = "70%"
+     var csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
+// Crear un nuevo elemento de entrada (input) para el token CSRF
+var csrfInput = document.createElement('input');
+csrfInput.type = 'hidden'; // Campo oculto
+csrfInput.name = '_token'; // Nombre del campo
+csrfInput.value = csrfToken; // Valor del token
+
+// Agregar el campo oculto al formulario
+formulario.appendChild(csrfInput)
+    
+    
+     // Crea el contenido del formulario utilizando innerHTML
+     formulario.innerHTML += `
+        
+         <div class="ventana">
+             <div class="publicarContenedor1">
+                 <img id="cerrar-img" src="images/Iconos/equis.png" width="24">
+             </div>
+             <div style="display:flex; align-items:center; justify-content:center; margin:auto;">
+                 <h1>Cargar historias</h1>
+             </div>
+             <div style="display:flex; align-items:center; justify-content:center; margin-top:10px;">
+                 <input type="file" name="archivo" id="archivo" accept="image/*" onchange="mostrarImagen()">
+                 <label id="subir" for="archivo">Seleccionar Archivo</label>
+             </div>
+             <div class="publicarContenedor2" style="height: 40%; margin-top: 3%;">
+                 <div id="contenedorImagen" class="insertarImg" style="height:100%;display:flex; flex-direction:column;">
+                     <h4>Inserte la imagen</h4>
+                 </div>
+             </div>
+             <div class="publicarContenedor2">
+                 <div class="botonCont">
+                     <input id="botonPublicar" class="botonPublicar" type="submit" value="Publicar">
+                 </div>
+             </div>
+         </div>
+     `;
+     let pantallaCompleta = document.createElement('div')
+     pantallaCompleta.classList.add('pantalla-completa')
+     
+     pantallaCompleta.appendChild(formulario)
+     
+     caja.appendChild(pantallaCompleta)
+    
+     
+    
+     
+    
+    
+     
+     
+     let valor = document.getElementById('cerrar-img')
+ 
+     valor.addEventListener('click', function() {
+         // Verificar si el nodo a eliminar es un hijo del body
+         if (caja.contains(pantallaCompleta)) {
+             caja.removeChild(pantallaCompleta);
+         }
+         
+     });
+     // Agrega el formulario al contenedor
+     
+ }
+
+ // Llama a la función para agregar el formulario dinámicamente
 
 perfilesHistorias.forEach(function(elemento) {
     elemento.addEventListener('click', () => llamarHistorias(elemento));
 });
 
 
-
-
-
+if(subirHistoria != null)
+    subirHistoria.addEventListener('click', mostrarInsertarHistorias)

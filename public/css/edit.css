@@ -10,6 +10,7 @@
     padding: 3%;
     padding-bottom: 5%;
     justify-content: center;
+    height: 80vh;
 }
 
 .texto{
@@ -61,8 +62,17 @@
     height: 30px;
 }
 
+.descartar{
+    width: 100%;
+    font-size: large;
+    border: 0px;
+    padding: 15px;
+}
 .boton1{
     width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: large;
     border-radius: 15px;
     border: 0px;
@@ -94,7 +104,7 @@
 
 .ventana{
     width: 70%;
-    height: 65%;
+    height: 75%;
     background-color:#fff;
     opacity: 1;
     border-radius: 15px;
@@ -226,6 +236,20 @@ input[type="file"] {
 @media (max-width: 600px){
     #publicarFondo{
         width: 100%;
+    }
+
+    .botonesAlineacion{
+        width: 95%;}
+    .camposContenedor{
+        width: 95%;
+    }
+
+    .campos{
+        width: 90%;
+    }
+
+    .perfil{
+        height: 75vh;
     }
 
 }

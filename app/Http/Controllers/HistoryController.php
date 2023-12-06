@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class HistoryController extends Controller
 {
-    public function showHistory(){
-        $historias = DB::table('cargarhistorias')->get();
-
+    public function showHistory()
+    {
+        $historias = DB::SELECT('SELECT * FROM historias');
         return view('probando', compact('historias'));
     }
 
-    public function showHistoryProfile(Request $request){
+    public function showHistoryProfile(Request $request)
+    {
         $parametro = $request->input('parametro');
-        $historias = DB::table('cargarhistorias')
-        ->where('id_usuarios',$parametro)->get();
+        $historias = DB::SELECT("SELECT * FROM historias
+                                WHERE id_usuarios = '$parametro'");
 
         // Enviar una respuesta con los datos de la consulta
         return response()->json(['historias' => $historias]);

@@ -30,7 +30,7 @@ body {
 .pie{
     padding-top: 5px;
     width: 75%;
-    margin: auto;
+    margin-top: auto;
 }
 .texto-pie{
     font-size: 0.8rem;
@@ -161,7 +161,7 @@ body {
 
 .usuarios__interes {
     margin-top: 15px;
-    height: 45%;
+    height: 55%;
     background-color: rgba(78, 100, 124, 0.08);
     width: 80%;
     border-radius: 5%;
@@ -213,9 +213,11 @@ body {
   .superior__cerrar{
     margin-right: 20px;
     margin-top: 20px;
+    margin-left: auto;
     display: flex;
     justify-content: end;
     height: 60px;
+    width: 70vw;
   }
   .cerrar__historias{
     position: absolute;
@@ -260,6 +262,10 @@ body {
     max-width: 100%;
     height: auto;
     
+  }
+
+  .splide__slide{
+    border-radius: 10px;
   }
 
 .ver-mas {

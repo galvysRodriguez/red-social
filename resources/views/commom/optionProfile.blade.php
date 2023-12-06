@@ -3,19 +3,16 @@
                     <form method="POST" action="/cerrar" class="opciones__perfil contenedor">
                         @csrf
                         <div class="contenedor enlace__perfil">
-                            <a href="/editProfile">Editar perfil</a>
+                            <a href="{{ asset('/editProfile') }}">Editar perfil</a>
                         </div>   
                         <div class="contenedor enlace__perfil">
-                            <a href="/save">Guardados</a>
+                            <a href="{{ asset('/save') }}">Guardados</a>
                         </div>
                         <div class="contenedor enlace__perfil">
-                            <a href="/upPublication">Publicar</a>
+                            <a href="{{ asset('/upPublication') }}">Publicar</a>
                         </div> 
-                        <div class="contenedor enlace__perfil">
-                            <a href="#">Convertirse a premium</a>
-                        </div>   
-                        <div class="contenedor enlace__perfil">
-                            <a href="#">Configuraciones</a>
+                        <div  class="contenedor enlace__perfil premiun">
+                            <a class="premium" href="#">Convertirse a premium</a>
                         </div>   
                         <div class="contenedor enlace__perfil">
                             <a href="#" onclick="this.closest('form').submit()">Cerrar Sesion</a>

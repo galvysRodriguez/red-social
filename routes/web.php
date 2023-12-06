@@ -12,8 +12,15 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaveController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\upPublicationController;
+use App\Http\Controllers\upHistoryController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationFollowController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ConvertPremiumController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +32,11 @@ use App\Http\Controllers\EditProfileController;
 |
 */
 
-Route::get('/aa', [HistoryController::class, 'showHistory']);
 
 // Ruta para el inicio
 Route::get('/', [PublicacionController::class, 'index']);
 
-Route::post('/showLikesAndSaves', [PublicacionController::class, 'showLikes'])->name('showLikes');
+Route::post('/ShowLikesAndSaves', [PublicacionController::class, 'showLikes'])->name('showLikes');
 
 // Ruta para la vista de inicio de sesión
 Route::get('/login', [LoginController::class, 'showLogin'])->middleware('guest')->name('login');
@@ -71,16 +77,24 @@ Route::post('/follow', [FollowController::class, 'follows'])->name('follows');
 
 Route::get('/follow', [FollowController::class, 'showFollow']);
 
+Route::get('/statistics', [StatisticsController::class, 'showStatistics']);
+
 Route::get('/save', [SaveController::class, 'showSaves'])->middleware('auth');
 
-Route::post('/history-profile',[HistoryController::class, 'showHistoryProfile']);
+Route::get('/statisticsSolicity', [StatisticsController::class, 'statisticsSolicity']);
+
+Route::post('/history-profile', [HistoryController::class, 'showHistoryProfile']);
 
 Route::post('/upPublication', [upPublicationController::class, 'upPublication'])->middleware('auth');
 
+Route::post('/upHistory', [upHistoryController::class, 'upHistory'])->middleware('auth');
+
 Route::get('/upPublication', [upPublicationController::class, 'showUpPublication'])->middleware('auth');
 
-/*
-Route::post('/update-password', [ForgotPasswordController::class, 'updatePassword']);
+Route::get('/notification', [NotificationController::class, 'showNotification'])->middleware('auth');
 
-// Ruta para enviar el correo electrónico de restablecimiento de contraseña
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');*/
+Route::get('/notification-follow', [NotificationFollowController::class, 'showNotification'])->middleware('auth');
+
+Route::get('/message', [MessageController::class, 'showMessage'])->middleware('auth');
+
+Route::post('/premium', [ConvertPremiumController::class, 'convertPremium'])->name('premium')->middleware('auth');

@@ -27,8 +27,10 @@
             </div>
             <div class="col-sm-12 col-md-6 FormBack d-flex justify-content-center align-items-center" style="display: flex; flex-direction: column;">
             <div  style = "display: flex; margin:auto; flex-direction: column; justify-content:center;">
-                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px; margin:auto;">
-                <h1><a style="color:#4C596C;" href="/">Waning</a></h1>
+                <a style = "margin:auto;" href="{{asset('/')}}">
+                    <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px;">
+                </a>
+
             </div>
                 <form method="POST" action="/login" class=" Fondo2 bg-body rounded-13 border border-2 border-original" style="margin:auto;">
                     @csrf
@@ -50,7 +52,6 @@
                     <div class="formato ContLogin Contra">
                         <img src="{{ asset('images/ImgLogin/contraseña.png') }}" class="icon">
                         <input placeholder="Contraseña" type="password" id="contraseña" name="contraseña" required>
-                        <img src="{{ asset('images/ImgLogin/VerContraseña.png') }}" class="IconVerContra">
                     </div>
 
                     @if($errors)
@@ -60,7 +61,7 @@
                     @endif
 
                     <div class="formato password-olvido">
-                        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+                        <a href="{{ asset('/forgot-password') }}">¿Olvidaste tu contraseña?</a>
                     </div>
 
                     <div class="formato ContLogin">
@@ -68,7 +69,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si todavía no tienes cuenta, <a style="margin-left: 2px;" href="/register"> Registrate</a></p>
+                        <p>Si todavía no tienes cuenta, <a style="margin-left: 2px;" href="{{ asset('/register') }}"> Registrate</a></p>
                     </div>
 
                 </form>

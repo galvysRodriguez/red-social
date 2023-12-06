@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ asset('js/alert.js') }}"></script>
+
     <title>Waning mensaje de confirmacion</title>
 </head>
 <body>
@@ -12,8 +14,14 @@
             <p>
                 Este mensaje fue enviado
             </p>
-            <a style="text-decoration:none; color:#1877F2" href="/">Volver al inicio</a>
-        </div>
+            <a style="text-decoration:none; color:#1877F2" href="{{ asset('/') }}">Volver al inicio</a>
     </div>
+    <script>
+        Swal.fire(
+            'Operacion con exito',
+            'Este mensaje fue enviado!',
+            'success'
+            )
+    </script>
 </body>
 </html>

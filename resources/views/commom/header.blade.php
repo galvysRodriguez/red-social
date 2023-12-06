@@ -1,7 +1,12 @@
 <header class="encabezado contenedor">
         <div class="encabezado__izquierdo contenedor">
-            <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo">
-            <h1>Waning</h1>
+            <a href="{{ asset('/') }}">
+                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo">
+                </a>
+                <a href="{{ asset('/') }}">
+                <h1 style =" color: #C6D1D8">Waning</h1>
+                </a>
+            
         </div>
         <div class="encabezado__central">
             <div class="central__busqueda contenedor">
@@ -41,11 +46,16 @@
                     <a id="btn_iniciar" href="/login">
                         <div><p>Iniciar sesión</p></div></a>
                 @endif
+
                 <div class="encabezado__mensajes">
+                    <a href="{{ asset('/message') }}">
                     <img class="icono" src="{{ asset('images/iconos de index/conversacion-blanco.png') }}" alt="">
+                    </a>
+                    
                 </div>
             </div>
             
         </div>
         
     </header>
+    

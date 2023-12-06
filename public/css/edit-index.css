@@ -1,0 +1,231 @@
+.menuSuperior{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 3%;
+}
+
+.perfil{
+    padding: 3%;
+    padding-bottom: 5%;
+    justify-content: center;
+}
+
+.texto{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.imgPerfil{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3%;
+}
+
+.camposContenedor{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+}
+
+.campos{
+    width: 60%;
+    border-radius: 8px;
+    padding: 10px;
+    padding-left: 20px;
+    border: 2px solid #4C596C;
+    resize: none;
+}
+
+.botonesContenedor{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+}
+
+.botonesAlineacion{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    height: 30px;
+}
+
+.boton1{
+    width: 40%;
+    font-size: large;
+    border-radius: 15px;
+    border: 0px;
+    padding: 15px;
+    color: #4C596C;
+    background-color: #fff;
+      
+}
+
+.boton2{
+    width: 40%;
+    font-size: large;
+    color: #fff;
+    border-radius: 15px;
+    border: 0px;
+    padding: 15px;
+    background-color:  #4C596C;  
+}
+
+.fondo{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .1);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.ventana{
+    width: 70%;
+    height: 65%;
+    background-color:#fff;
+    opacity: 1;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: auto;
+    margin-top: 5%;
+}
+
+.publicarContenedor1{
+    align-items: center;
+    justify-content: end;
+    display: flex;
+    padding: 5px;
+}
+
+#publicarFondo{
+    display: flex;
+    height: 100%;
+    width: 57vw;
+}
+
+
+.publicarContenedor2{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
+}
+
+.insertarImg{
+    border: 2px solid #4C596C;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+    resize: none;
+}
+
+.botonCont {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    margin-top: 10px;
+}
+
+.file-input-wrapper {
+    position: relative;
+    
+    display: inline-block;
+} 
+input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#icono_subir{
+    width: 16px;
+    height: 16px;
+}
+#subir{
+    z-index: 100;
+    cursor: pointer;
+    color: #1877F2;
+    
+}
+
+.botonPublicar{
+    width: 30%;
+    background-color: #4C596C;
+    color: #fff;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+#botonPublicar{
+    width: 40%;
+    max-width: 40%;
+}
+
+@media (max-width: 1024px){
+
+    .ventana{
+        width: 100%;
+        height: 100%;
+        background-color:#fff;
+        border-radius: 0px;
+        padding: 15px;
+    }
+
+    .fondo{
+        background-color: #fff;
+    }
+
+    .insertarImg{
+        width: 90%;
+    }
+
+    .botonCont {
+        width: 100%;
+    }
+
+    #publicarFondo{
+        display: flex;
+        height: 100%;
+        width: 80%;
+    }
+
+    #botonPublicar{
+        width: 40%;
+        max-width: 40%;
+    }
+}
+
+@media (max-width: 600px){
+    #publicarFondo{
+        width: 100%;
+    }
+
+}

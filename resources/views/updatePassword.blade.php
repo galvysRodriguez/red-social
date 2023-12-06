@@ -25,7 +25,12 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 FormBack d-flex justify-content-center align-items-center" style="display: flex; flex-direction: column;" >
+            <div  style = "display: flex; margin:auto; flex-direction: column; justify-content:center;">
+                <a style = "margin:auto;" href="{{asset('/')}}">
+                    <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px;">
+                </a>
 
+            </div>
                 <form method="POST" action="/update-password" class="Fondo2 bg-body rounded-13 border border-3 border-original" style="margin:auto;">
                     @csrf
                     <div style="width: 100%; margin-top: 5%;">
@@ -55,7 +60,7 @@
                     @endif
 
                     <div class="formato iniciar-sesion">
-                        <a href="/login">Iniciar sesión</a>
+                        <a href="{{ asset('/login') }}">Iniciar sesión</a>
                     </div>
 
                     <div class="formato ContLogin">
@@ -63,7 +68,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si todavía no tienes cuenta, <a href="/register"> Registrate</a></p>
+                        <p>Si todavía no tienes cuenta, <a href="{{ asset('/register') }}"> Registrate</a></p>
                     </div>
 
                 </form>

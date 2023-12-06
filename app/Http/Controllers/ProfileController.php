@@ -13,62 +13,96 @@ class ProfileController extends Controller
 {
     public function showProfile()
     {
-        $numSeguidores = 0;
-        $numSeguidos = 0;
-        $numPublicaciones = 0;
-        $valSeguido = 0;
+        $idUsuario = auth()->user()->id_usuarios;
+        $publicaciones = Db::SELECT("SELECT * FROM publicaciones
+                                    WHERE id_usuarios = '$idUsuario'");
+        $numSeguidores = Db::SELECT("SELECT COUNT(*) as count FROM seguidores
+                                    WHERE id_seguido = '$idUsuario'");
+        $numSeguidos = Db::SELECT("SELECT COUNT(*) as count FROM seguidores
+                                    WHERE id_sigue = '$idUsuario'");
+        $numPublicaciones = Db::SELECT("SELECT COUNT(*) as count FROM publicaciones
+                                    WHERE id_usuarios = '$idUsuario'");
+        $usuarios2 = DB::SELECT("SELECT u1.id_usuarios, u1.nombre_cuenta, u1.foto_perfil FROM usuarios u1
+         WHERE not (u1.id_usuarios in (
+             SELECT s.id_seguido FROM seguidores s
+             WHERE s.id_sigue = '$idUsuario' and s.id_seguido = u1.id_usuarios) or 
+             u1.id_usuarios = '$idUsuario')
+             group by u1.id_usuarios, u1.nombre_cuenta, u1.foto_perfil
+             LIMIT 4");
 
-        //$publicaciones = DB::table('cargarpublicaciones')->get();
-        $publicaciones = DB::table('cargarpublicaciones')->where('id_usuarios', '=', auth()->user()->id_usuarios)->get();
-        DB::select('CALL informacionPerfil(?, @numSeguidores, @numPublicaciones, @numSeguidos, @valSeguido, ?)', array(auth()->user()->id_usuarios, auth()->user()->id_usuarios));
-        $numSeguidores = DB::select('SELECT @numSeguidores as numSeguidores')[0]->numSeguidores;
-        $numSeguidos = DB::select('SELECT @numSeguidos as numSeguidos')[0]->numSeguidos;
-        $numPublicaciones = DB::select('SELECT @numPublicaciones as numPublicaciones')[0]->numPublicaciones;
-        $valSeguido = DB::select('SELECT @valSeguido as valSeguido')[0]->valSeguido;
+        if (session('espremium')) {
+            return view('premium/profile-premium', [
+                'usuario' => auth()->user(),
+                'publicaciones' => $publicaciones,
+                'numSeguidores' => $numSeguidores[0]->count,
+                'numPublicaciones' => $numPublicaciones[0]->count,
+                'numSeguidos' => $numSeguidos[0]->count,
+                'usuarios2' => $usuarios2
+                ]);
+        }
 
         return view('profile', [
             'usuario' => auth()->user(),
             'publicaciones' => $publicaciones,
-            'numSeguidores' => $numSeguidores,
-            'numPublicaciones' => $numPublicaciones,
-            'numSeguidos' => $numSeguidos
+            'numSeguidores' => $numSeguidores[0]->count,
+            'numPublicaciones' => $numPublicaciones[0]->count,
+            'numSeguidos' => $numSeguidos[0]->count,
+            'usuarios2' => $usuarios2
             ]);
     }
 
-    public function showProfileOther($idEncriptado)
+    public function showProfileOther($id)
     {
-        //$idDesencriptado = Crypt::decryptString($idEncriptado);
+        
         if(auth()->user()) {
-            if(auth()->user()->id_usuarios == $idEncriptado) {
+            if(auth()->user()->id_usuarios == $id) {
                 return redirect('/profile');
             }
             $idUsuario = auth()->user()->id_usuarios;
-        }
-        else{
+        } else {
             $idUsuario = 0;
         }
 
-        $numSeguidores = 0;
-        $numSeguidos = 0;
-        $numPublicaciones = 0;
-        $valSeguido = 0;
+        $usuario = User::find($id);
+        $publicaciones = Db::SELECT("SELECT * FROM publicaciones
+                                    WHERE id_usuarios = '$id'");
+        $numSeguidores = Db::SELECT("SELECT COUNT(*) as count FROM seguidores
+                                    WHERE id_seguido = '$id'");
+        $numSeguidos = Db::SELECT("SELECT COUNT(*) as count FROM seguidores
+                                    WHERE id_sigue = '$id'");
+        $numPublicaciones = Db::SELECT("SELECT COUNT(*) as count FROM publicaciones
+                                    WHERE id_usuarios = '$id'");
+        $valSeguido = Db::SELECT("SELECT COUNT(*) as count FROM seguidores
+                                    WHERE id_seguido = '$id' and id_sigue = '$idUsuario'");
+        $usuarios2 = DB::SELECT("SELECT u1.id_usuarios, u1.nombre_cuenta, u1.foto_perfil FROM usuarios u1
+        WHERE not (u1.id_usuarios in (
+            SELECT s.id_seguido FROM seguidores s
+            WHERE s.id_sigue = '$idUsuario' and s.id_seguido = u1.id_usuarios) or 
+            u1.id_usuarios = '$idUsuario')
+            group by u1.id_usuarios, u1.nombre_cuenta, u1.foto_perfil
+            LIMIT 4");
 
-        $publicaciones = DB::table('cargarpublicaciones')->where('id_usuarios', '=', $idEncriptado)->get();
-        $usuario = User::find($idEncriptado);
-        DB::select('CALL informacionPerfil(?, @numSeguidores, @numPublicaciones, @numSeguidos, @valSeguido, ?)', array($idEncriptado, $idUsuario));
-        $numSeguidores = DB::select('SELECT @numSeguidores as numSeguidores')[0]->numSeguidores;
-        $numSeguidos = DB::select('SELECT @numSeguidos as numSeguidos')[0]->numSeguidos;
-        $numPublicaciones = DB::select('SELECT @numPublicaciones as numPublicaciones')[0]->numPublicaciones;
-        $valSeguido = DB::select('SELECT @valSeguido as valSeguido')[0]->valSeguido;
+        if (session('espremium')) {
+            return view('premium/profileUser-premium', [
+                'usuario' => $usuario,
+                'publicaciones' => $publicaciones,
+                'numSeguidores' => $numSeguidores[0]->count,
+                'numPublicaciones' => $numPublicaciones[0]->count,
+                'numSeguidos' => $numSeguidos[0]->count,
+                'valSeguido' => $valSeguido[0]->count,
+                'usuarios2' => $usuarios2
+            ]);
+        }
 
 
         return view('profileUser', [
             'usuario' => $usuario,
             'publicaciones' => $publicaciones,
-            'numSeguidores' => $numSeguidores,
-            'numPublicaciones' => $numPublicaciones,
-            'numSeguidos' => $numSeguidos, 
-            'valSeguido'=> $valSeguido
+            'numSeguidores' => $numSeguidores[0]->count,
+            'numPublicaciones' => $numPublicaciones[0]->count,
+            'numSeguidos' => $numSeguidos[0]->count,
+            'valSeguido' => $valSeguido[0]->count,
+            'usuarios2' => $usuarios2
             ]);
     }
 

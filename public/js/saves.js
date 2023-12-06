@@ -1,11 +1,23 @@
+
+
 function submitFormSaves() {
-    var formData = new FormData(guardadosForm)
-    var xhr = new XMLHttpRequest()
-    xhr.open('POST', '/save', true)
-    xhr.onload = function () {
-        if (xhr.status == 200) {
-            // Realiza las operaciones necesarias con la respuesta, si la hay
-        }
-    };
-    xhr.send(formData);
+    token = $('meta[name="csrf-token"]').attr('content')
+    
+        $.ajax({     
+            url: '/save',
+            type: 'POST',
+            dataType: 'json',
+            data: { valor: imagenesCarrusel.getActual().id },
+            beforeSend:function(xhr){
+                xhr.setRequestHeader('X-CSRF-TOKEN', token)
+            },
+            success: function(response) {
+                console.log(response)
+                // Maneja la respuesta JSON aquí
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    
 }

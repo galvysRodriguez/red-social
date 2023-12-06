@@ -10,45 +10,47 @@
     <script src="{{ asset('js/splide.min.js') }}"></script>
     <script src="{{ asset('js/splideAutoScroll.min.js') }}"></script>
     <script src="{{ asset('js/splideIntersection.min.js') }}"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AR6QwbGn2AlqbUUnwisJg0hDe3zftqPFqhDzOOIyElsQJMjhY929jEVFCZXvRtI0UK_cuNwA3KvAKtAn"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/publication.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/edit-index.css') }}" rel="stylesheet">
     <link href="{{ asset('css/splide.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/normalize.css') }}">
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
 </head>
-
 <body>
     @include('commom/header')
     <div class="contenedor caja">
     <nav class="navegacion">
             <div class="menu_arriba">
-                <a href="/">
+                <a href="{{ asset('/') }}">
                     <div class="contenedor itemMenuSeleccionado"> 
                         <img src="{{ asset('images/iconos de index/iconos rellenos/casita-relleno.png') }}" class="icono">
                         &nbsp; &nbsp; Inicio  
                     </div>
                 </a>
-                <a href="/profile">
+                <a href="{{ asset('/profile') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/usuario.png') }}" class="icono"> &nbsp; &nbsp;
                      Perfil 
                     </div>
                 </a>
-                <a href="/">
+                <a href="{{ asset('/notification') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
                     &nbsp; Notificaciones 
                     </div>
                 </a>
-                <a href="/upPublication">
+                <a href="{{ asset('/upPublication') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/megafono.png') }}" class="icono"> &nbsp; &nbsp;
                         Publicar 
                     </div>
                 </a>
-                <a href="/">
+                <a href="{{ asset('/message') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
                         Mensajes 
                     </div>
                 </a>
-                <a href="/save">
+                <a href="{{ asset('/save') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardar-instagram.png') }}" class="icono"> &nbsp; &nbsp;
                         Guardados
                     </div>
@@ -65,19 +67,22 @@
                         <div class="splide__list">
                         @if(Auth::user())
 
-                        <div class="splide__slide perfil__usuario contenedor">
+                        <div style = "flex-direction:column; margin-top:20px;" class="splide__slide perfil__usuario contenedor">
                             @if (optional(Auth::user())->foto_perfil)
 
-                            <img src="{{ asset('images/inicio/mario.png') }}" alt="" class="perfil__imagen perfil__historias" title="tu historia" value="{{Auth::user()->id_usuarios}}">
+                            <img data-parametro="{{Auth::user()->id_usuarios}}" src="{{ Auth::user()->foto_perfil }}" alt="" class="perfil__imagen perfil__historias" title="tu historia" value="{{Auth::user()->id_usuarios}}">
                             @else
 
                             <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" class="perfil__imagen perfil__historias" data-parametro="{{Auth::user()->id_usuarios}}">
                             @endif
+                            <img class="historia-subir" src="{{ asset('images/iconos de index/mas.png')}}" alt="">
+                            
                         <label class="texto__historia">Tu historia</label>
+                        
                     </div>
                     @endif
                     @foreach($usuarioshistorias as $usuarios)
-                    <div class="splide__slide perfil__usuario contenedor">
+                    <div style="margin-top:20px;" class="splide__slide perfil__usuario contenedor">
                         @if (is_null($usuarios->foto_perfil))
                         <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" class="perfil__imagen perfil__historias" data-parametro="{{$usuarios->id_usuarios}}">
                         @else
@@ -116,16 +121,16 @@
                                     id="tarjeta__siguiente">
                             </div>
             </div>
-            @if (Auth::check())
+            @if (Auth::user())
             <form id="like-form" action="{{ route('likes') }}" method="POST" style="display: none;">
                 @csrf
-                <input type="hidden" name="id_usuario" value="{{ Auth::user()->id_usuarios }}">
+                
                 <input type="hidden" id="id_publicacion_hidden" name="id_publicacion">
             </form>
             
             <form id="save-form" action="{{ route('saves') }}" method="POST" style="display: none;">
                 @csrf
-                <input type="hidden" name="id_usuario" value="{{ Auth::user()->id_usuarios }}">
+             
                 <input type="hidden" id="id_publicacion_hidden2" name="id_publicacion2">
             </form>
             @endif
@@ -143,8 +148,6 @@
                 <div class="publicacion__encabezado contenedor">
                     <div class="publicacion__encabezado__izquierda contenedor">
                         <a class="acceder-usuario" href="{{ route('profile-user', ['idEncriptado' => 2]) }}">
-                            <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" alt=""
-                                id="perfil__publicacion__principal" class="perfil__imagen publicacion__perfil">
                                 <img src="{{ asset('images/ImgLogin/LoginPerfil.png') }}" alt=""
                                 id="perfil__publicacion__defecto" class="perfil__imagen publicacion__perfil">
                             <div class="encabezado__cuenta">
@@ -168,7 +171,6 @@
                     <p class="texto__publicacion">
                     </p>
                     <div class="contenedor publicacion__interaccion">
-                        <p id="publicacion__comentario" class="etiqueta__opaco"></p>
                         <p id="publicacion__megusta" class="etiqueta__opaco"></p>
                     </div>
                     
@@ -182,6 +184,7 @@
     <script src="{{ asset('js/messageLogin.js') }}"></script>
     <script src="{{ asset('js/likes.js') }}"></script>
     <script src="{{ asset('js/changeImages.js') }}"></script>
+    <script src="{{ asset('js/convertPremium.js') }}"></script>
     <script src="{{ asset('js/slideHistories.js') }}"></script>
     <script src="{{ asset('js/showHistory.js') }}"></script>
     <script src="{{ asset('js/profileOption.js') }}"></script>

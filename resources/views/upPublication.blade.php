@@ -9,6 +9,9 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/publication.css') }}" rel="stylesheet">
     <link href="{{ asset('css/edit.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/LoginCSS/CredeInvalida.css')}}">
+    <script src="https://www.paypal.com/sdk/js?client-id=AR6QwbGn2AlqbUUnwisJg0hDe3zftqPFqhDzOOIyElsQJMjhY929jEVFCZXvRtI0UK_cuNwA3KvAKtAn"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
 
     <script src="{{ asset('js/publicar.js') }}"></script>
@@ -21,33 +24,33 @@
     <div class="contenedor caja">
         <nav class="navegacion">
             <div class="menu_arriba">
-            <a href="/">
+            <a href="{{ asset('/') }}">
                     <div class="contenedor itemMenu"> 
                         <img src="{{ asset('images/iconos de index/casa.png') }}" class="icono">
                         &nbsp; &nbsp; Inicio  
                     </div>
                 </a>
-                <a href="/profile">
+                <a href="{{ asset('/profile') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/usuario.png') }}" class="icono"> &nbsp; &nbsp;
                      Perfil 
                     </div>
                 </a>
-                <a href="/">
+                <a href="{{ asset('/notification') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/notificacion.png') }}" class="icono"> &nbsp;
                     &nbsp; Notificaciones 
                     </div>
                 </a>
-                <a href="/upPublication">
+                <a href="{{ asset('/upPublication') }}">
                     <div class="contenedor itemMenuSeleccionado"> <img src="{{ asset('images/iconos de index/iconos rellenos/publicar-relleno.png') }}" class="icono"> &nbsp; &nbsp;
                         Publicar 
                     </div>
                 </a>
-                <a href="/">
+                <a href="{{ asset('/message') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/conversacion.png') }}" class="icono"> &nbsp; &nbsp;
                         Mensajes 
                     </div>
                 </a>
-                <a href="/save">
+                <a href="{{ asset('/save') }}">
                     <div class="contenedor itemMenu"> <img src="{{ asset('images/iconos de index/guardar-instagram.png') }}" class="icono"> &nbsp; &nbsp;
                         Guardados
                     </div>
@@ -62,7 +65,7 @@
         <div class="ventana">
 
         <div class="publicarContenedor1">
-            <a href="/"><img src="{{ asset('images/Iconos/equis.png') }}" width="24"></a>
+            <a href="{{ asset('/') }}"><img src="{{ asset('images/Iconos/equis.png') }}" width="24"></a>
     
 </div>
 <div style="display:flex; align-items:center; justify-content:center;">
@@ -84,6 +87,12 @@
 <div class="publicarContenedor2" style="height: 20%; margin-top: 1%;">
     <textarea name="descripcion" class="insertarImg" placeholder="Descripcion"></textarea>
 </div>
+@if($errors)
+                            <div class="Crede-Invalidas">
+                                <p>{{ $errors->first() }}</p>
+                            </div>
+                    @endif
+
 
 <div class="publicarContenedor2">
     <div class="botonCont">
@@ -100,6 +109,8 @@
     </div>
     <script src="{{ asset('js/publicar.js') }}"></script>
     <script src="{{ asset('js/profileOption.js') }}"></script>
+    <script src="{{ asset('js/convertPremium.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 </body>
 
 </html>

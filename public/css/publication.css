@@ -11,6 +11,10 @@ body {
 
 }
 
+.historia-subir{
+    position:absolute; 
+    top:45%;
+}
 
 .principal {
     height: 86vh;
@@ -436,6 +440,9 @@ body {
     accion 4%
 
     */
+    .historia-subir{
+        top:45%;
+    }
     #tarjeta__seleccionada, .publicacion__descripcion{
         max-width: 90%;
     }

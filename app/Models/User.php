@@ -14,7 +14,9 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
 
-    protected $table = 'usuarios_vistas';
+
+
+    protected $table = 'usuarios';
     protected $primaryKey = 'id_usuarios';
     /**
      * The attributes that are mass assignable.

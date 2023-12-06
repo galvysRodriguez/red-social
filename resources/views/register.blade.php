@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/FormatoLogin.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/DisLogin.css')}}">
     <link rel="stylesheet" href="{{ asset('css/LoginCSS/CredeInvalida.css')}}">
+    <script src="https://www.paypal.com/sdk/js?client-id=AR6QwbGn2AlqbUUnwisJg0hDe3zftqPFqhDzOOIyElsQJMjhY929jEVFCZXvRtI0UK_cuNwA3KvAKtAn"></script>
     <link href="{{ asset('images/iconos/logopequeño.ico') }}" rel="icon" type="image/ico">
 </head>
 
@@ -28,8 +29,9 @@
 
             <div class="col-sm-12 col-md-6 FormBack d-public/inicio_sesion/Registro.html public/inicio_sesion/Login.html justify-content-center align-items-center" style="display: flex; flex-direction: column;">
             <div  style = "display: flex; margin:auto; flex-direction: column;">
-                <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height:64px; margin:auto;">
-                <h1><a style="color:#4C596C;" href="/">Waning</a></h1>
+                <a style = "padding: 15px; margin:auto;" href="{{asset('/')}}">
+                    <img src="{{ asset('images/iconos de index/logopequeño.png') }}" alt="" title="logo" class="logo" style="width:64px; height: 64px;">
+                </a>
             </div>
                 <form method="POST" action="/register" class="col-10 Fondo2 bg-body rounded-2 border border-1 border-black" style="margin:auto;">
                     @csrf
@@ -65,13 +67,13 @@
                     <div class="formato ContLogin Contra">
                         <img src="{{ asset('images/ImgLogin/contraseña.png') }}" class="icon">
                         <input placeholder="Contraseña" type="password" id="contraseña" name="contraseña1" required>
-                        <img src="{{ asset('images/ImgLogin/VerContraseña.png') }}" class="IconVerContra">
+                      
                     </div>
 
                     <div class="formato ContLogin Contra">
                         <img src="{{ asset('images/ImgLogin/contraseña.png') }}" class="icon">
                         <input placeholder=" Repetir Contraseña" type="password" id="repcontraseña" name="contraseña2" required>
-                        <img src="{{ asset('images/ImgLogin/VerContraseña.png') }}" class="IconVerContra">
+                       
                     </div>
 
                     @if($errors)
@@ -81,7 +83,7 @@
                     @endif
 
                     <div class="formato password-olvido">
-                        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+                        <a href="{{ asset('/forgot-password') }}">¿Olvidaste tu contraseña?</a>
                     </div>
 
                     <div class="formato ContLogin">
@@ -89,7 +91,7 @@
                     </div>
                     
                     <div class="formato registarse">
-                        <p>Si ya tienes cuenta, <a style="margin-left: 2px;" href="/login">Inicia sesion</a></p>
+                        <p>Si ya tienes cuenta, <a style="margin-left: 2px;" href="{{ asset('/login') }}">Inicia sesion</a></p>
                     </div>
 
                 </form>
